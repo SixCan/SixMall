@@ -16,13 +16,8 @@ function onRequest(resp) {
                   return
             }
             console.log("file exist : "+imgPath)
-            fs.readFile(path, function (err, data) {
-                  if (err) {
-                        sendError(resp, 210, "read file error : " + imgPath)
-                        return
-                  }
-                  sendFile(resp, data)
-            })
+            var readStream = fs.createReadStream(imgPath)
+            readStream.pipe(resp)
       })
 
 }
