@@ -23,6 +23,9 @@ a.com/item?id=123&from=3rd
 function onRequest(req, resp) {
       var reqUrl = req.url          //=> "item?id=2&from=a" , "/", "/home", "/public/a.jpg"
       var apiName = url.parse(reqUrl).pathname  //=> "/item", "/", "/home", "/public/a.jpg"
+      if(reqUrl === '/favicon.ico') {
+            return
+      }
       console.log("szw : url = " + reqUrl + " ; api = " + apiName)
 
       dispatch(apiName, resp)
