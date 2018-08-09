@@ -15,7 +15,13 @@ function onRequest(resp) {
                   sendError(resp, 200, "file not found : " + imgPath)
                   return
             }
-            console.log("file exist : "+imgPath)
+            
+            var stat = fs.statSync(imgPath)
+            resp.writeHead(200, {
+                  "Content-Type": "image/jpg",
+                  "Content-Length": stat.size
+            })
+
             var readStream = fs.createReadStream(imgPath)
             readStream.pipe(resp)
       })
@@ -27,13 +33,6 @@ function sendError(response, errCode, errMsg) {
       response.write('{"code": ' + errCode + ', "msg":"' + errMsg + '", "payload":{}}');
       response.end();
 }
-
-
-function sendFile(response, fileContents) {
-      response.writeHead(200, { 'Content-Type': 'text/plain' });
-      response.end(fileContents);
-}
-
 
 exports.splash = onRequest
 

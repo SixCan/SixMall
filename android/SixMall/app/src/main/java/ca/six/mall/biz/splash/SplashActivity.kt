@@ -8,16 +8,21 @@ import ca.six.mall.R
 import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.util.nav
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity() {
     val ACTION_ID_SPLASH_DONE = 11
-    val DURATION_SPLASH = 2000L
+    val DURATION_SPLASH = 6000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
+//        Picasso.get().load("http://localhost:8899/splash").into(ivSplash)
+        Glide.with(this).load("http://localhost:8899/splash").into(ivSplash)
+//        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
 
     }
 
