@@ -26,7 +26,7 @@ function onRequest(resp){
 
 function sendError(response, errCode, errMsg) {
       response.writeHead(404, { 'Content-Type': 'application/json' });
-      response.write('{"code": '+errCode+', "msg":"'+errMsg+',"payload":{}}');
+      response.write('{"code": '+errCode+', "msg":"'+errMsg+'", "payload":{}}');
       response.end();
 }
 
@@ -35,5 +35,8 @@ function sendFile(response, fileContents) {
       response.writeHead(200, { 'Content-Type': 'text/plain' });
       response.end(fileContents);
 }
+
+
+exports.splash = onRequest
 
 
