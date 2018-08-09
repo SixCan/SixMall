@@ -7,8 +7,8 @@ import android.os.Message
 import ca.six.mall.R
 import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
+import ca.six.mall.core.http.HttpEngine
 import ca.six.mall.util.nav
-import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -20,8 +20,9 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-//        Picasso.get().load("http://localhost:8899/splash").into(ivSplash)
-        Glide.with(this).load("http://localhost:8899/splash").into(ivSplash)
+        HttpEngine.request("splash")
+
+        // TODO rever it back
 //        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
 
     }

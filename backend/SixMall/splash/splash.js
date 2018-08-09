@@ -12,15 +12,9 @@ function onRequest(resp) {
       var imgPath = path.join(rootPath, "splash" + randomNum + ".jpg")
       var imgUrl = "http://192.168.2.26:8899/images/splash/splash" + randomNum + ".jpg"
 
-      resp.writeHead(200, {'Content-Type' : 'text/plain'})
-      resp.end(utils.succResp(' "imgUrl": "'+imgUrl+'"'))
+      utils.succResp(resp, ' "imgUrl": "'+imgUrl+'"')
 }
 
-function sendError(response, errCode, errMsg) {
-      response.writeHead(404, { 'Content-Type': 'application/json' });
-      response.write('{"code": ' + errCode + ', "msg":"' + errMsg + '", "payload":{}}');
-      response.end();
-}
 
 exports.splash = onRequest
 
