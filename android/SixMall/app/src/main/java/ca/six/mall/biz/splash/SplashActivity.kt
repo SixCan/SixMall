@@ -8,9 +8,12 @@ import ca.six.mall.R
 import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.core.http.HttpEngine
+import ca.six.mall.core.http.MockResponseInterceptor
 import ca.six.mall.util.nav
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_splash.*
+import okhttp3.*
+import java.io.IOException
 
 class SplashActivity : BaseActivity() {
     val ACTION_ID_SPLASH_DONE = 11
@@ -20,7 +23,10 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        HttpEngine.request("splash")
+        // TODO 稍后改用Presenter / ViewModel
+        HttpEngine.request("splash", baseHandler) {respStr ->
+            println("szw actv resp = $respStr ; thread = ${Thread.currentThread().name}")
+        }
 
         // TODO rever it back
 //        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
