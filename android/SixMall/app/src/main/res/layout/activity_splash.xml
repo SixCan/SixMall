@@ -16,12 +16,5 @@
                    app:url="@{vm.url}" android:scaleType="centerCrop"
                    />
 
-
-        <TextView android:id="@+id/tvSplash"
-                  android:layout_width="match_parent" android:layout_height="wrap_content"
-                  android:textSize="24dp" android:textColor="#f00" android:gravity="center"
-                  android:text="@{vm.desp}" tools:text="This is Splash page"
-                  />
-
     </RelativeLayout>
 </layout>

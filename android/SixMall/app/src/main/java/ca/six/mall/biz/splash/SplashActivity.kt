@@ -14,7 +14,7 @@ import ca.six.mall.util.nav
 
 class SplashActivity : BaseActivity() {
     val ACTION_ID_SPLASH_DONE = 11
-    val DURATION_SPLASH = 6000L
+    val DURATION_SPLASH = 2000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +26,7 @@ class SplashActivity : BaseActivity() {
 
         viewModel.init()
 
-        // TODO rever it back
-//        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
+        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
 
     }
 
