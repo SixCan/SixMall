@@ -21,7 +21,7 @@ class SplashActivity : BaseActivity() {
         setContentView(R.layout.activity_splash)
 
         // TODO 稍后改用Presenter / ViewModel
-        HttpEngine.request("splash", baseHandler) { payload ->
+        HttpEngine.request("splash") { payload ->
             val imgUrl = payload.get("imgUrl") as String
             Picasso.get().load(imgUrl).into(ivSplash)
         }

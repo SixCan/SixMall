@@ -1,6 +1,6 @@
 package ca.six.mall.core.http
 
-import android.os.Handler
+import ca.six.mall.core.BaseApp
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -20,10 +20,13 @@ object HttpEngine {
                 .build()
     }
 
-    fun request(apiName: String, mainThreadHandler : Handler, onResp : (payload : JSONObject) -> Unit) {
+    fun request(apiName: String, onResp : (payload : JSONObject) -> Unit) {
+        val mainThreadHandler = BaseApp.handler
+
         val req = Request.Builder()
                 .url(PREFIX + apiName)
                 .build()
+
         http.newCall(req).enqueue( object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 println("szw err = $e") //TODO 后续可以统一处理请求过程中的failure
