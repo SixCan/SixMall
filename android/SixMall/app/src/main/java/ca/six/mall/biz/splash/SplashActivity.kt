@@ -23,7 +23,6 @@ class SplashActivity : BaseActivity() {
         // TODO 稍后改用Presenter / ViewModel
         HttpEngine.request("splash", baseHandler) { payload ->
             val imgUrl = payload.get("imgUrl") as String
-            println("szw activity img = $imgUrl")  //TODO remove
             Picasso.get().load(imgUrl).into(ivSplash)
         }
 

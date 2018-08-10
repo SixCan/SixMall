@@ -2,9 +2,9 @@ var http = require('http')
 var url = require('url')
 var queryString = require('querystring')
 
-var splashApi = require('./splash/splash')
+var splashApi = require('./splash/splash') // splash API
 
-var staticRes = require('./static_res')
+var staticRes = require('./static_res')  // 请求静态图片
 
 var router = {}
 router["/splash"] = splashApi.splash
@@ -45,8 +45,7 @@ function dispatch(apiName, resp) {
       if (typeof target === 'function') {
             target(resp)
       } else {
-            // TODO 静态文件处理
-            // TODO 静态文件找不到就sendError()
+            // TODO 有问题就sendError()
       }
 }
 
