@@ -4,8 +4,11 @@ var queryString = require('querystring')
 
 var splashApi = require('./splash/splash')
 
+var staticRes = require('./static_res')
+
 var router = {}
 router["/splash"] = splashApi.splash
+router["res"] = staticRes.requestStaticRes
 
 http.createServer(onRequest).listen(8899, function () {
       console.log("server starts up! (listen on 8899)")
@@ -23,21 +26,27 @@ a.com/item?id=123&from=3rd
 function onRequest(req, resp) {
       var reqUrl = req.url          //=> "item?id=2&from=a" , "/", "/home", "/public/a.jpg"
       var apiName = url.parse(reqUrl).pathname  //=> "/item", "/", "/home", "/public/a.jpg"
-      if(reqUrl === '/favicon.ico') {
+      if (reqUrl === '/favicon.ico') {
             return
       }
+
+      if (reqUrl.endsWith("jpg")) {
+            router["res"](reqUrl, resp)
+            return
+      }
+
       console.log("szw : url = " + reqUrl + " ; api = " + apiName)
 
       dispatch(apiName, resp)
 }
 
-function dispatch(apiName, resp){
+function dispatch(apiName, resp) {
       var target = router[apiName]
-      if(typeof target === 'function') {
+      if (typeof target === 'function') {
             target(resp)
       } else {
             // TODO 静态文件处理
-                  // TODO 静态文件找不到就sendError()
+            // TODO 静态文件找不到就sendError()
       }
 }
 

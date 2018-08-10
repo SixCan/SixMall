@@ -2,6 +2,7 @@ package ca.six.mall.core.http
 
 import android.os.Handler
 import okhttp3.*
+import org.json.JSONObject
 import java.io.IOException
 
 
@@ -19,7 +20,7 @@ object HttpEngine {
                 .build()
     }
 
-    fun request(apiName: String, mainThreadHandler : Handler, onResp : (respStr : String) -> Unit) {
+    fun request(apiName: String, mainThreadHandler : Handler, onResp : (payload : JSONObject) -> Unit) {
         val req = Request.Builder()
                 .url(PREFIX + apiName)
                 .build()
@@ -30,7 +31,8 @@ object HttpEngine {
 
             override fun onResponse(call: Call, resp: Response) {
                 val respStr =  resp .body()?.string() ?: "" // 三目运算符
-                mainThreadHandler.post{ onResp(respStr) }
+                val payload = JSONObject(respStr).get("payload") as JSONObject
+                mainThreadHandler.post{ onResp(payload) }
             }
 
         })
