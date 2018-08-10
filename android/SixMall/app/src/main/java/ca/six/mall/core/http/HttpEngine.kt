@@ -20,18 +20,18 @@ object HttpEngine {
                 .build()
     }
 
-    fun request(apiName: String, onResp : (payload : JSONObject) -> Unit) {
+    fun request(apiName: String, onResp: (payload: JSONObject) -> Unit) {
         val req = Request.Builder()
                 .url(PREFIX + apiName)
                 .build()
 
-        http.newCall(req).enqueue( object : Callback {
+        http.newCall(req).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 println("szw err = $e") //TODO 后续可以统一处理请求过程中的failure
             }
 
             override fun onResponse(call: Call, resp: Response) {
-                val respStr =  resp .body()?.string() ?: "" // 三目运算符
+                val respStr = resp.body()?.string() ?: "" // 三目运算符
                 val payload = JSONObject(respStr).get("payload") as JSONObject
                 onResp(payload)
             }

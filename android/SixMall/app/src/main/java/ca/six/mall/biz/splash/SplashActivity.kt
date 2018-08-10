@@ -18,12 +18,10 @@ class SplashActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_splash)
 
-//        val binding = ActivitySplashBinding.inflate(layoutInflater)
         val binding = DataBindingUtil.setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
         val viewModel : SplashViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
-        binding?.vm = viewModel
+        binding.vm = viewModel
         binding.setLifecycleOwner(this)
 
         viewModel.init()
