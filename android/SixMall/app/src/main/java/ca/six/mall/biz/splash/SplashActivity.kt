@@ -1,16 +1,15 @@
 package ca.six.mall.biz.splash
 
 import android.annotation.SuppressLint
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import ca.six.mall.R
 import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
-import ca.six.mall.core.http.HttpEngine
+import ca.six.mall.databinding.ActivitySplashBinding
 import ca.six.mall.util.nav
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity() {
     val ACTION_ID_SPLASH_DONE = 11
@@ -20,12 +19,14 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        // TODO 稍后改用Presenter / ViewModel
-        HttpEngine.request("splash") { payload ->
-            val imgUrl = payload.get("imgUrl") as String
-            Picasso.get().load(imgUrl).into(ivSplash)
-        }
+        val binding = ActivitySplashBinding.inflate(layoutInflater)
+        val viewModel : SplashViewModel = ViewModelProviders.of(this).get(SplashViewModel::class.java)
+        binding.vm = viewModel
 
+        viewModel.init()
+
+        println("szw:${binding.tvSplash.text}")
+        println("szw:${viewModel.desp.get()}")
         // TODO rever it back
 //        handler.sendEmptyMessageDelayed(ACTION_ID_SPLASH_DONE, DURATION_SPLASH)
 

@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".biz.splash.SplashActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/ivSplash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        />
+    <data>
+        <variable name="vm" type="ca.six.mall.biz.splash.SplashViewModel"/>
+    </data>
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        tools:context=".biz.splash.SplashActivity">
+
+        <ImageView android:id="@+id/ivSplash"
+                   android:layout_width="match_parent" android:layout_height="match_parent"
+                   android:scaleType="centerCrop"
+                   />
+
+
+        <TextView android:id="@+id/tvSplash"
+                  android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:textSize="24dp" android:textColor="#f00" android:gravity="center"
+                  android:text="@{vm.desp}" tools:text="This is Splash page"
+                  />
+
+    </RelativeLayout>
+</layout>
