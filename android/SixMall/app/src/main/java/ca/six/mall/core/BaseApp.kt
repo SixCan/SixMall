@@ -9,7 +9,6 @@ class BaseApp : Application() {
 
     companion object {
         var appContext : Context by Delegates.notNull<Context>()
-        val handler = Handler()
     }
 
     override fun onCreate() {

@@ -21,8 +21,6 @@ object HttpEngine {
     }
 
     fun request(apiName: String, onResp : (payload : JSONObject) -> Unit) {
-        val mainThreadHandler = BaseApp.handler
-
         val req = Request.Builder()
                 .url(PREFIX + apiName)
                 .build()
@@ -35,7 +33,7 @@ object HttpEngine {
             override fun onResponse(call: Call, resp: Response) {
                 val respStr =  resp .body()?.string() ?: "" // 三目运算符
                 val payload = JSONObject(respStr).get("payload") as JSONObject
-                mainThreadHandler.post{ onResp(payload) }
+                onResp(payload)
             }
 
         })

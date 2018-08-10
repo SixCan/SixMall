@@ -15,7 +15,7 @@ class SplashViewModel : ViewModel() {
         HttpEngine.request("splash") { payload ->
             val imgUrl = payload.get("imgUrl") as String
 //            Picasso.get().load(imgUrl).into(ivSplash)
-            desp.setValue(imgUrl)
+            desp.postValue(imgUrl)
         }
     }
 
