@@ -4,11 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ca.six.mall.view.CircleCornerImageView
+    <ca.six.mall.view.solar.PlanetView android:id="@+id/testView"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:src="@drawable/panda"
-        android:layout_margin="100dp"
+        android:layout_centerInParent="true"
     />
 
 </RelativeLayout>
