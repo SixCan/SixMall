@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <ca.six.mall.view.CircleCornerImageView
         android:layout_width="130dp"
         android:layout_height="130dp"
         android:src="@drawable/panda"
