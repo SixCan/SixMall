@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,41 +17,29 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
     var iconRes: Int = 0
     var text: String = ""
 
+    lateinit var circleView : ImageView
+    lateinit var textView : TextView
+
     init {
         orientation = VERTICAL
+        setBackgroundColor(Color.GRAY)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        println("szw onFinishInflate()")
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         println("szw onMeasure()")
-    }
 
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        println("szw onSizeChanged()")
+        val w = MeasureSpec.getSize(widthMeasureSpec)
+        val h = MeasureSpec.getSize(heightMeasureSpec)
 
         val ivHeight = (h * 0.8f).toInt()
         val tvHeight = h - ivHeight
 
-        val circleView = ImageView(context)
-        circleView.setBackgroundColor(bgColor)
-        circleView.setImageResource(iconRes)
-
-        val textView = TextView(context)
-        textView.setText(text)
-        textView.setTextColor(Color.BLACK)
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 22.0f)
-
-        //addView()自己会调用 requestLayout() 与 invalidate(true);
-        println("szw --------- addView ----------- $ivHeight, $tvHeight")
-        this.addView(circleView, LinearLayout.LayoutParams(ivHeight, ivHeight))
-        this.addView(textView, LinearLayout.LayoutParams(w, tvHeight))
-
+        circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY))
+        textView.measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
+                MeasureSpec.makeMeasureSpec(tvHeight, MeasureSpec.EXACTLY))
     }
 
 
@@ -60,11 +49,11 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         this.text = text
         println("szw initData()")
 
-        val circleView = ImageView(context)
+        circleView = ImageView(context)
         circleView.setBackgroundColor(bgColor)
         circleView.setImageResource(iconRes)
 
-        val textView = TextView(context)
+        textView = TextView(context)
         textView.setText(text)
         textView.setTextColor(Color.BLACK)
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 22.0f)
@@ -73,7 +62,6 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         this.addView(circleView)
         this.addView(textView)
     }
-
 
 }
 
