@@ -1,6 +1,7 @@
 package ca.six.mall.view.solar
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -8,13 +9,21 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import ca.six.tomato.util.getCircleBitmap
 
+/*
+[使用建议]
+    * 宽高建议至少是100dp, 至多不要过200dp
+    * 且因为没有对wrap_content做处理, 所以暂时也不支持wrap_content
+ */
 
 class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
     : LinearLayout(context, attr, defStyle) {
     var bgColor: Int = Color.TRANSPARENT
     var iconRes: Int = 0
     var text: String = ""
+
+    var ivHeight = 0
 
     lateinit var circleView: ImageView
     lateinit var textView: TextView
@@ -30,7 +39,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
 
-        val ivHeight = (h * 0.75f).toInt()
+        ivHeight = (h * 0.75f).toInt()
         val tvHeight = h - ivHeight
 
         circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
@@ -51,6 +60,11 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
 
         val textSize = h / 17.0f
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
+
+        val srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
+        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight.toFloat())
+        println("szw onSizeChanged() : radius = ${ivHeight.toFloat()}")
+        circleView.setImageBitmap(circleBitmap)
     }
 
     fun initData(bgColor: Int = Color.TRANSPARENT, iconRes: Int = 0, text: String = "") {
@@ -60,12 +74,10 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
 
         circleView = ImageView(context)
         circleView.setBackgroundColor(bgColor)
-        circleView.setImageResource(iconRes)
 
         textView = TextView(context)
         textView.setText(text)
         textView.setTextColor(Color.BLACK)
-
 
         // addView()自己会调用 requestLayout() 与 invalidate(true);
         this.addView(circleView)

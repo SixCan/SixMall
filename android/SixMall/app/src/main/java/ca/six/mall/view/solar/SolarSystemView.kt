@@ -10,7 +10,9 @@ addMenu(icon, text, clickListener);
 class SolarSystemView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
     : ConstraintLayout(context, attr, defStyle) {
 
+    init{
 
+    }
 
 
 
