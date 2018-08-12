@@ -4,11 +4,10 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.View
+import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import ca.six.mall.view.CircleCornerImageView
 
 
 class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
@@ -17,8 +16,8 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
     var iconRes: Int = 0
     var text: String = ""
 
-    lateinit var circleView : ImageView
-    lateinit var textView : TextView
+    lateinit var circleView: ImageView
+    lateinit var textView: TextView
 
     init {
         orientation = VERTICAL
@@ -28,7 +27,6 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        println("szw onMeasure()")
 
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
@@ -40,14 +38,23 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
                 MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY))
         textView.measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(tvHeight, MeasureSpec.EXACTLY))
+
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+
+        // 下面三行代码放onMeasure()也行, 但会被调用多次, 不如放这里. 后面onLayout()调用时再放置
+        val ivLp = circleView.layoutParams as LinearLayout.LayoutParams
+        ivLp.gravity = Gravity.CENTER_HORIZONTAL  // android:layout_gravity
+
+        textView.gravity = Gravity.CENTER  // android:gravity
+    }
 
     fun initData(bgColor: Int = Color.TRANSPARENT, iconRes: Int = 0, text: String = "") {
         this.bgColor = bgColor
         this.iconRes = iconRes
         this.text = text
-        println("szw initData()")
 
         circleView = ImageView(context)
         circleView.setBackgroundColor(bgColor)
