@@ -21,7 +21,6 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
 
     init {
         orientation = VERTICAL
-        setBackgroundColor(Color.GRAY)
     }
 
 
@@ -31,7 +30,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
 
-        val ivHeight = (h * 0.8f).toInt()
+        val ivHeight = (h * 0.75f).toInt()
         val tvHeight = h - ivHeight
 
         circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
@@ -44,11 +43,14 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
 
-        // 下面三行代码放onMeasure()也行, 但会被调用多次, 不如放这里. 后面onLayout()调用时再放置
+        // 下面几行代码放onMeasure()也行, 但会被调用多次, 不如放这里. 后面onLayout()调用时再放置
         val ivLp = circleView.layoutParams as LinearLayout.LayoutParams
         ivLp.gravity = Gravity.CENTER_HORIZONTAL  // android:layout_gravity
 
         textView.gravity = Gravity.CENTER  // android:gravity
+
+        val textSize = h / 17.0f
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
     }
 
     fun initData(bgColor: Int = Color.TRANSPARENT, iconRes: Int = 0, text: String = "") {
@@ -63,7 +65,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         textView = TextView(context)
         textView.setText(text)
         textView.setTextColor(Color.BLACK)
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 22.0f)
+
 
         // addView()自己会调用 requestLayout() 与 invalidate(true);
         this.addView(circleView)
