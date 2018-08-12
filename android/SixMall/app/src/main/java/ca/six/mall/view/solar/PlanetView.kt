@@ -3,6 +3,7 @@ package ca.six.mall.view.solar
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.support.annotation.DrawableRes
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
@@ -19,11 +20,7 @@ import ca.six.tomato.util.getCircleBitmap
 
 class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
     : LinearLayout(context, attr, defStyle) {
-    var bgColor: Int = Color.TRANSPARENT
-    var iconRes: Int = 0
-    var text: String = ""
-
-    var ivHeight = 0
+    @DrawableRes var iconRes: Int = 0
 
     lateinit var circleView: ImageView
     lateinit var textView: TextView
@@ -39,7 +36,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
 
-        ivHeight = (h * 0.75f).toInt()
+        val ivHeight = (h * 0.75f).toInt()
         val tvHeight = h - ivHeight
 
         circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
@@ -62,18 +59,14 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
 
         val srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
-        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight.toFloat())
-        println("szw onSizeChanged() : radius = ${ivHeight.toFloat()}")
+        val circleBitmap = getCircleBitmap(srcBitmap, w / 2.0f)  //这不用ivHeight/2, 是因为对iv来说, this.w比iv.w更大
         circleView.setImageBitmap(circleBitmap)
     }
 
-    fun initData(bgColor: Int = Color.TRANSPARENT, iconRes: Int = 0, text: String = "") {
-        this.bgColor = bgColor
+    fun initData(iconRes: Int = 0, text: String = "") {
         this.iconRes = iconRes
-        this.text = text
 
         circleView = ImageView(context)
-        circleView.setBackgroundColor(bgColor)
 
         textView = TextView(context)
         textView.setText(text)
