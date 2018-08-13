@@ -7,10 +7,11 @@ import android.support.constraint.ConstraintSet.TOP
 import android.support.constraint.ConstraintSet.BOTTOM
 import android.support.constraint.ConstraintSet.LEFT
 import android.support.constraint.ConstraintSet.RIGHT
+import android.support.constraint.ConstraintSet.PARENT_ID
 import android.util.AttributeSet
 import android.view.View
-import ca.six.mall.R
 import ca.six.mall.util.dp2px
+import ca.six.tomato.util.randomColor
 
 /*
 addMenu(icon, text, clickListener);
@@ -26,6 +27,7 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
         val menuView = PlanetView(context)
 
         menuView.id = View.generateViewId()
+        menuView.setBackgroundColor(randomColor())
         menuView.initData(iconResId, text)
         menuView.setOnClickListener { clickListener() }
 
@@ -45,14 +47,8 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
         val cy = h / 2.0f
         val minSize = Math.min(w, h)
 
-        println("szw this.id = ${this.id}")
-        (0 until childCount).forEach {idx ->
-            val child = getChildAt(idx)
-            println("szw id = ${child.id}")
-        }
-
-        val constraints = ConstraintSet()
-        constraints.clone(this)
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(this)
 
         (0 until childCount).forEach {idx ->
             val child = getChildAt(idx)
@@ -60,16 +56,18 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
 
             if(idx == 0){
                 // center
-                constraints.connect(child.id, TOP, this.id, TOP)
-                constraints.connect(child.id, BOTTOM, this.id, BOTTOM)
-                constraints.connect(child.id, LEFT, this.id, LEFT)
-                constraints.connect(child.id, RIGHT, this.id, RIGHT)
+                constraintSet.connect(child.id, TOP, PARENT_ID, TOP)
+                constraintSet.connect(child.id, BOTTOM, PARENT_ID, BOTTOM)
+                constraintSet.connect(child.id, LEFT, PARENT_ID, LEFT)
+                constraintSet.connect(child.id, RIGHT, PARENT_ID, RIGHT)
+//                constraintSet.centerHorizontally(child.id, this.id)
+//                constraintSet.centerVertically(child.id, this.id)
             } else {
                 // planets
             }
 
-            constraints.applyTo(this)
         }
+        constraintSet.applyTo(this)
     }
 
 }

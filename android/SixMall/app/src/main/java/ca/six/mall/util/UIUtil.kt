@@ -1,8 +1,10 @@
 package ca.six.tomato.util
 
 import android.graphics.*
+import android.support.annotation.ColorInt
 import android.widget.Toast
 import ca.six.mall.core.BaseApp
+import java.util.*
 
 fun showToast(text: String) {
     Toast.makeText(BaseApp.appContext, text, Toast.LENGTH_SHORT).show()
@@ -23,6 +25,13 @@ fun getCircleBitmap(src: Bitmap, radius: Float): Bitmap {
     tempCanvas.drawBitmap(src, 0f, 0f, paint)
 
     return tempBitmap
+
+}
+
+@ColorInt
+fun randomColor() : Int {
+    val rand = Random()
+    return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256) )
 
 }
 
