@@ -11,14 +11,15 @@ class DevOnlyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dev_only)
 
-        testView.addMenu(100f, R.drawable.panda, "Panda") {
+        println("szw solarView = $solarView")
+        solarView.addMenu(100f, R.drawable.panda, "Panda") {
             println("click panda menu")
         }
-        testView.addMenu(160f, R.drawable.panda, "Panda") {
-            println("click panda menu")
-        }
-
-        testView.draw()
+//        solarView.addMenu(160f, R.drawable.panda, "Panda") {
+//            println("click panda menu")
+//        }
+//
+//        solarView.draw()
 
     }
 
