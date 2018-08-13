@@ -4,10 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ca.six.mall.view.solar.PlanetView android:id="@+id/testView"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_centerInParent="true"
+    <ca.six.mall.view.solar.SolarSystemView
+        android:id="@+id/testView"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
     />
 
 </RelativeLayout>

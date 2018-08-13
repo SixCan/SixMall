@@ -2,6 +2,7 @@ package ca.six.mall.biz.splash
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.support.annotation.WorkerThread
 import ca.six.mall.core.http.HttpEngine
 
 class SplashViewModel : ViewModel() {

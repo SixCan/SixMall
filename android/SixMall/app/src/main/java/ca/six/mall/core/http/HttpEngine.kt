@@ -1,5 +1,6 @@
 package ca.six.mall.core.http
 
+import android.support.annotation.WorkerThread
 import ca.six.mall.core.BaseApp
 import okhttp3.*
 import org.json.JSONObject
@@ -20,7 +21,7 @@ object HttpEngine {
                 .build()
     }
 
-    fun request(apiName: String, onResp: (payload: JSONObject) -> Unit) {
+    fun request(apiName: String, @WorkerThread onResp: (payload: JSONObject) -> Unit) {
         val req = Request.Builder()
                 .url(PREFIX + apiName)
                 .build()
