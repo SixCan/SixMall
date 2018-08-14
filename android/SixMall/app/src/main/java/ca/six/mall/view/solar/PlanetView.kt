@@ -12,16 +12,18 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import ca.six.mall.R
 import ca.six.tomato.util.getCircleBitmap
+import ca.six.tomato.util.randomColor
 
 /*
 [使用建议]
-    * 宽高建议至少是100dp, 至多不要过200dp
+    * height : width = 100 : 75的样子, 效果最佳
     * 且因为没有对wrap_content做处理, 所以暂时也不支持wrap_content
  */
 
 class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
     : LinearLayout(context, attrs, defStyle) {
     @DrawableRes var iconRes: Int = 0
+    var ivHeight = 0
 
     lateinit var circleView: ImageView
     lateinit var textView: TextView
@@ -42,7 +44,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
 
-        val ivHeight = (h * 0.75f).toInt()
+        ivHeight = (h * 0.75f).toInt()
         val tvHeight = h - ivHeight
 
         circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
@@ -65,8 +67,13 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
 
         val srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
-        val circleBitmap = getCircleBitmap(srcBitmap, w / 2.0f)  //这不用ivHeight/2, 是因为对iv来说, this.w比iv.w更大
+        println("szw view.onSizeChanged() -- w = $w, h = $h, ivS = $ivHeight")
+        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight.toFloat())  //这不用ivHeight/2, 是因为对iv来说, this.w比iv.w更大
         circleView.setImageBitmap(circleBitmap)
+
+        //TODO delete
+//        circleView.setBackgroundColor(randomColor())
+//        textView.setBackgroundColor(randomColor())
     }
 
     fun initData(iconRes: Int = 0, text: String = "") {
