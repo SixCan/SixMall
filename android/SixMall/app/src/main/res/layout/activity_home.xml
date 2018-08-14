@@ -9,6 +9,18 @@
         android:background="@color/colorPrimary"
         app:navigationIcon="@drawable/ic_back_white" app:title="SixMall"
         app:titleTextColor="#ffff"
-        />
+        >
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="200dp" android:layout_height="match_parent"
+            android:gravity="center" android:layout_margin="14dp"
+            android:hint="Search" android:textColorHint="#BDBDBD"
+            android:drawableLeft="@drawable/ic_search_white"
+            android:textCursorDrawable="@color/colorPrimary" android:textColor="#fff"
+            android:background="@drawable/bg_search_bar"
+            />
+
+    </android.support.v7.widget.Toolbar>
 
 </android.support.constraint.ConstraintLayout>
