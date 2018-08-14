@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import ca.six.mall.R
 import ca.six.tomato.util.getCircleBitmap
+import ca.six.tomato.util.getVectorBitmap
 import ca.six.tomato.util.randomColor
 
 /*
@@ -66,9 +67,12 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val textSize = h / 17.0f
         textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
 
-        val srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
+        //TODO delete
         println("szw view.onSizeChanged() -- w = $w, h = $h, ivS = $ivHeight")
-        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight.toFloat())  //这不用ivHeight/2, 是因为对iv来说, this.w比iv.w更大
+
+        var srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
+        srcBitmap = srcBitmap ?: getVectorBitmap(context, iconRes, ivHeight, ivHeight)
+        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight / 2.0f)
         circleView.setImageBitmap(circleBitmap)
 
         //TODO delete
