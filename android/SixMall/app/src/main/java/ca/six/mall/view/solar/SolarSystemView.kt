@@ -15,12 +15,20 @@ import ca.six.tomato.util.randomColor
 
 /*
 addMenu(icon, text, clickListener);
+
+[example]
+        solarView.addMenu(180f, R.drawable.panda, "Panda") {
+            println("szw click large panda menu")
+        }
+        solarView.addMenu(120f, R.drawable.panda, "ball") {
+            println("szw click small panda menu")
+        }
+        solarView.draw()
+
  */
+@Deprecated("centerInParent does not work! I still need fix this bug first. Before the fix, this class is deprecated")
 class SolarSystemView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
     : ConstraintLayout(context, attr, defStyle) {
-
-    init{
-    }
 
     fun addMenu(sizeInDp : Float, iconResId: Int, text: String, clickListener: () -> Unit) {
         println("szw addMenu()")
@@ -36,7 +44,6 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
     }
 
     fun draw(){
-
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -48,11 +55,11 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
         val minSize = Math.min(w, h)
 
         val constraintSet = ConstraintSet()
-        constraintSet.clone(this)
 
         (0 until childCount).forEach {idx ->
             val child = getChildAt(idx)
             val lp = child.layoutParams as ConstraintLayout.LayoutParams
+            println("szw $idx ; child.id = ${child.id}")
 
             if(idx == 0){
                 // center
@@ -71,3 +78,9 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
     }
 
 }
+
+/*
+调用顺序:
+ szw addMenu()
+ szw onSizeChanged()
+ */

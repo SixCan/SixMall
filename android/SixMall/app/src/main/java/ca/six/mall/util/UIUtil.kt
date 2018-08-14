@@ -15,7 +15,6 @@ fun getCircleBitmap(src: Bitmap, radius: Float): Bitmap {
 
     val centerX = src.width / 2.0f
     val centerY = src.height / 2.0f
-    println("szw x = $centerX; y = $centerY")
 
     val tempBitmap = Bitmap.createBitmap(src.width, src.height, Bitmap.Config.ARGB_8888)
     val tempCanvas = Canvas(tempBitmap)
