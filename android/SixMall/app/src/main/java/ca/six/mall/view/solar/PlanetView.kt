@@ -3,6 +3,7 @@ package ca.six.mall.view.solar
 import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import ca.six.mall.R
+import ca.six.mall.util.px2dp
 import ca.six.tomato.util.getCircleBitmap
 import ca.six.tomato.util.getVectorBitmap
 import ca.six.tomato.util.randomColor
@@ -33,9 +35,12 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         orientation = VERTICAL
 
         val ta = context.obtainStyledAttributes(attrs, R.styleable.PlanetView)
-        val iconResId = ta.getResourceId(R.styleable.PlanetView_picon, R.drawable.ic_launcher)
-        val text = ta.getString(R.styleable.PlanetView_ptext)
-        initData(iconResId, text)
+        val iconResId = ta.getResourceId(R.styleable.PlanetView_planet_icon, R.drawable.ic_launcher)
+        val text = ta.getString(R.styleable.PlanetView_planet_text)
+        val color = ta.getColor(R.styleable.PlanetView_planet_iconColor, Color.BLACK)
+        val textSize = ta.getDimension(R.styleable.PlanetView_planet_textSize, 30f)
+        val textSizeInDp = context.px2dp(textSize)
+        initData(iconResId, color, text, textSizeInDp)
     }
 
 
@@ -64,30 +69,24 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         textView.gravity = Gravity.CENTER  // android:gravity
 
-        val textSize = h / 17.0f
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize)
+        circleView.setImageResource(iconRes)
 
         //TODO delete
-        println("szw view.onSizeChanged() -- w = $w, h = $h, ivS = $ivHeight")
-
-        var srcBitmap = BitmapFactory.decodeResource(resources, iconRes)
-        srcBitmap = srcBitmap ?: getVectorBitmap(context, iconRes, ivHeight, ivHeight)
-        val circleBitmap = getCircleBitmap(srcBitmap, ivHeight / 2.0f)
-        circleView.setImageBitmap(circleBitmap)
-
-        //TODO delete
+//        println("szw view.onSizeChanged() -- w = $w, h = $h, ivS = $ivHeight")
 //        circleView.setBackgroundColor(randomColor())
 //        textView.setBackgroundColor(randomColor())
     }
 
-    fun initData(iconRes: Int = 0, text: String = "") {
+    fun initData(iconRes: Int = 0, @ColorInt iconColor : Int, text: String = "", textSizeInDp : Float) {
         this.iconRes = iconRes
 
         circleView = ImageView(context)
+        circleView.setColorFilter(iconColor)
 
         textView = TextView(context)
         textView.setText(text)
         textView.setTextColor(Color.BLACK)
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSizeInDp)
 
         // addView()自己会调用 requestLayout() 与 invalidate(true);
         this.addView(circleView)

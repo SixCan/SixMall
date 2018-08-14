@@ -1,6 +1,7 @@
 package ca.six.mall.view.solar
 
 import android.content.Context
+import android.graphics.Color
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.constraint.ConstraintSet.TOP
@@ -36,7 +37,7 @@ class SolarSystemView @JvmOverloads constructor(context: Context, attr: Attribut
 
         menuView.id = View.generateViewId()
         menuView.setBackgroundColor(randomColor())
-        menuView.initData(iconResId, text)
+        menuView.initData(iconResId, Color.RED, text, 12f )
         menuView.setOnClickListener { clickListener() }
 
         val sizeInPx = context.dp2px(sizeInDp).toInt()

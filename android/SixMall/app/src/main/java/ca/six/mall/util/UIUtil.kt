@@ -3,6 +3,7 @@ package ca.six.tomato.util
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.*
+import android.graphics.drawable.VectorDrawable
 import android.support.annotation.ColorInt
 import android.widget.Toast
 import ca.six.mall.core.BaseApp

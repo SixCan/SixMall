@@ -8,3 +8,9 @@ fun Context.dp2px(dp : Float) : Float{
     val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, metrics)
     return px
 }
+
+fun Context.px2dp(px: Float) : Float {
+    val metrics = this.resources.displayMetrics
+    val dp = px / metrics.density
+    return dp
+}

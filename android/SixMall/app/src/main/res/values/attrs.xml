@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PlanetView">
-        <attr name="picon" format="integer"/>
-        <attr name="ptext" format="string"/>
+        <attr name="planet_icon" format="integer"/>
+        <attr name="planet_iconColor" format="color"/>
+        <attr name="planet_text" format="string"/>
+        <attr name="planet_textSize" format="dimension"/>
     </declare-styleable>
 </resources>
