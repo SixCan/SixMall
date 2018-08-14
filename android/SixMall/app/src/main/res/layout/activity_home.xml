@@ -7,20 +7,29 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent" android:layout_height="?android:attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:navigationIcon="@drawable/ic_back_white" app:title="SixMall"
-        app:titleTextColor="#ffff"
+        app:navigationIcon="@drawable/ic_menu_white"
+        android:focusable="true" android:focusableInTouchMode="true"
         >
 
         <EditText
             android:id="@+id/etSearch"
             android:layout_width="200dp" android:layout_height="match_parent"
-            android:gravity="center" android:layout_margin="14dp"
-            android:hint="Search" android:textColorHint="#BDBDBD"
-            android:drawableLeft="@drawable/ic_search_white"
-            android:textCursorDrawable="@color/colorPrimary" android:textColor="#fff"
+            android:layout_gravity="center" android:layout_margin="14dp"
+            android:hint="   Search" android:textColorHint="#BDBDBD"
+            android:drawableLeft="@drawable/ic_search_grey"
+            android:textCursorDrawable="@color/colorPrimary" android:textColor="#eee"
             android:background="@drawable/bg_search_bar"
             />
 
+        <ImageView
+            android:id="@+id/ivCategory"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:src="@drawable/ic_category_white"
+            android:layout_gravity="right" android:layout_marginRight="20dp"
+            />
+
     </android.support.v7.widget.Toolbar>
+
+
 
 </android.support.constraint.ConstraintLayout>
