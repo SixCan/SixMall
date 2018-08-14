@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -30,6 +33,18 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <!-- Solar Menus -->
+    <ca.six.mall.view.solar.PlanetView
+        android:id="@+id/menuOrders"
+        android:layout_width="75dp" android:layout_height="100dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="200dp"
+        app:picon="@drawable/panda"
+        app:ptext="Panda"
+        />
+
+
+    <!-- Recommendation -->
 
 
 </android.support.constraint.ConstraintLayout>

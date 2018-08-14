@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import ca.six.mall.R
 import ca.six.tomato.util.getCircleBitmap
 
 /*
@@ -18,8 +19,8 @@ import ca.six.tomato.util.getCircleBitmap
     * 且因为没有对wrap_content做处理, 所以暂时也不支持wrap_content
  */
 
-class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet? = null, defStyle: Int = 0)
-    : LinearLayout(context, attr, defStyle) {
+class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0)
+    : LinearLayout(context, attrs, defStyle) {
     @DrawableRes var iconRes: Int = 0
 
     lateinit var circleView: ImageView
@@ -27,6 +28,11 @@ class PlanetView @JvmOverloads constructor(context: Context, attr: AttributeSet?
 
     init {
         orientation = VERTICAL
+
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.PlanetView)
+        val iconResId = ta.getResourceId(R.styleable.PlanetView_picon, R.drawable.ic_launcher)
+        val text = ta.getString(R.styleable.PlanetView_ptext)
+        initData(iconResId, text)
     }
 
 
