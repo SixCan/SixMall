@@ -50,7 +50,7 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val w = MeasureSpec.getSize(widthMeasureSpec)
         val h = MeasureSpec.getSize(heightMeasureSpec)
 
-        ivHeight = (h * 0.75f).toInt()
+        ivHeight = (h * 0.7f).toInt()
         val tvHeight = h - ivHeight
 
         circleView.measure(MeasureSpec.makeMeasureSpec(ivHeight, MeasureSpec.EXACTLY),
