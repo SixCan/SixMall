@@ -19,7 +19,7 @@ import ca.six.tomato.util.randomColor
 
 /*
 [使用建议]
-    * height : width = 100 : 75的样子, 效果最佳
+    * 因为要显示完文字, 所以width比height多一些才能显示完所有文字(iv会自动居中的)
     * 且因为没有对wrap_content做处理, 所以暂时也不支持wrap_content
  */
 
@@ -71,10 +71,6 @@ class PlanetView @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         circleView.setImageResource(iconRes)
 
-        //TODO delete
-//        println("szw view.onSizeChanged() -- w = $w, h = $h, ivS = $ivHeight")
-//        circleView.setBackgroundColor(randomColor())
-//        textView.setBackgroundColor(randomColor())
     }
 
     fun initData(iconRes: Int = 0, @ColorInt iconColor : Int, text: String = "", textSizeInDp : Float) {
