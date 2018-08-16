@@ -7,19 +7,9 @@ import ca.six.mall.view.rv.RvViewHolder
 
 import java.util.ArrayList
 
-abstract class OneAdapter<T> : RecyclerView.Adapter<RvViewHolder> {
-    var layoutResId: Int = 0
-    var data: List<T>? = null
-
-    constructor(layoutResId: Int) {
-        this.layoutResId = layoutResId
-        data = ArrayList()
-    }
-
-    constructor(layoutResId: Int, data: List<T>) {
-        this.layoutResId = layoutResId
-        this.data = data
-    }
+abstract class OneAdapter<T>(var layoutResId: Int, data: List<T> = ArrayList())
+    : RecyclerView.Adapter<RvViewHolder>() {
+    var data: List<T>? = data
 
     override fun getItemCount(): Int {
         return if (data == null) 0 else data!!.size
