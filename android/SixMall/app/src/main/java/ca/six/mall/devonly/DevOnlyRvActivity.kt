@@ -27,7 +27,6 @@ class DevOnlyRvActivity : AppCompatActivity() {
     }
 
     fun row(): BindingRow {
-        println("szw getRow()")
         return BindingRow(R.layout.item_dev_only_one, BR.user)
     }
 
