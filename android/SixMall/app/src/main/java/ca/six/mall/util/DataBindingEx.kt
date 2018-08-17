@@ -18,13 +18,21 @@ object DataBindingEx {
                 .into(iv)
     }
 
-    @BindingAdapter("app:data", "app:row")
+    @BindingAdapter( "row")
     @JvmStatic
     @MainThread
-    fun <T> rvSetData(rv: RecyclerView, data: List<T>?, row : BindingRow?) {
-        if(row != null) {
-            val adapter = OneBindingAdapter<T>(row.layoutResId, row.bindingId, data)
-            rv.adapter = adapter
-        }
+    fun rvSetRow(rv : RecyclerView, row : BindingRow?){
+        println("szw rvSetRow : row = ${row}")
+    }
+
+    @BindingAdapter( "data")
+    @JvmStatic
+    @MainThread
+    fun <T> rvSetData(rv: RecyclerView, data: List<T>?) {
+        println("szw rvSetData : data=${data}}")
+//        if (row != null) {
+//            val adapter = OneBindingAdapter<T>(row.layoutResId, row.bindingId, data)
+//            rv.adapter = adapter
+//        }
     }
 }

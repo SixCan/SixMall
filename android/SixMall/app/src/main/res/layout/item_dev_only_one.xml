@@ -15,7 +15,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textSize="23dp"
-            android:text='@{user.name + "---" + user.age}'
+            android:text='@{user.name}'
             />
     </RelativeLayout>
 </layout>

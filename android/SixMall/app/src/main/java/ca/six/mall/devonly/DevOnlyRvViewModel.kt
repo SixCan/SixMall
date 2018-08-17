@@ -14,7 +14,7 @@ class DevOnlyRvViewModel : ViewModel() {
                 println("szw after sleep")
 
                 val list = ArrayList<String>()
-                (1..20).forEach { list.add("item $it") }
+                (1..5).forEach { list.add("item $it") }
                 data.postValue(list)
             }
         }).start()
