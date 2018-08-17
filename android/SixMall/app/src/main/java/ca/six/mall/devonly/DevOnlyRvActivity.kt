@@ -19,6 +19,7 @@ class DevOnlyRvActivity : AppCompatActivity() {
         val viewModel: DevOnlyRvViewModel = ViewModelProviders.of(this).get(DevOnlyRvViewModel::class.java)
         binding.rvDemo.layoutManager = LinearLayoutManager(this)
         binding.vm = viewModel
+        binding.view = this
         binding.setLifecycleOwner(this)
 
         viewModel.init()
