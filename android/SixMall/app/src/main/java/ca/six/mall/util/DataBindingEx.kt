@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter
 import android.support.annotation.MainThread
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import ca.six.mall.view.rv.one_binding.BindingRow
 import ca.six.mall.view.rv.one_binding.OneBindingAdapter
 import com.squareup.picasso.Picasso
 
@@ -17,11 +18,13 @@ object DataBindingEx {
                 .into(iv)
     }
 
-    @BindingAdapter("app:data", "app:itemLayout", "app:")
+    @BindingAdapter("app:data", "app:row")
     @JvmStatic
     @MainThread
-    fun <T> rvSetData(rv: RecyclerView, data: List<T>, layoutResId : Int) {
-        val adapter = OneBindingAdapter<T>(layoutResId, vari, data)
-        rv.adapter = adapter
+    fun <T> rvSetData(rv: RecyclerView, data: List<T>?, row : BindingRow?) {
+        if(row != null) {
+            val adapter = OneBindingAdapter<T>(row.layoutResId, row.bindingId, data)
+            rv.adapter = adapter
+        }
     }
 }
