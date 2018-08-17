@@ -1,4 +1,4 @@
-package ca.six.mall.devonly
+package ca.six.mall.devonly.oneadapter
 
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
