@@ -26,10 +26,13 @@ class DevOnlyTypesRvActivity : AppCompatActivity() {
         val list = ArrayList<BindingTypesRow<*>>()
         list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("Adam", 2000)))
         list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("Eva", 2000)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyPerson(20, "szw", true)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyPerson(10, "xx", false)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyPerson(10, "dd", false)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "xx", false)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "dd", false)))
         list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("test", 1000)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "xx", false)))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "dd", false)))
         return list
     }
 }
