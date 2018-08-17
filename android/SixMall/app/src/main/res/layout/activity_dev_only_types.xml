@@ -2,20 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="user" type="ca.six.mall.devonly.pojo.DevOnlyUser"/>
+        <variable name="view" type="ca.six.mall.devonly.oneadapter.DevOnlyTypesRvActivity"/>
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvDevOnlyOne"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDemoTypes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="23dp"
-            android:text='@{user.name + "--" + user.age}'
             />
+
     </RelativeLayout>
 </layout>

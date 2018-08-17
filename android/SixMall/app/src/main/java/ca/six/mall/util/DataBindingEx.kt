@@ -23,7 +23,6 @@ object DataBindingEx {
     @JvmStatic
     @MainThread
     fun <T> rvSetData(rv: RecyclerView, data: List<T>?, row : BindingRow?) {
-//        println("szw rvSetData : data=${data}, row = ${row}")
         if (row != null) {
             val adapter = OneBindingAdapter<T>(row.layoutResId, row.bindingId, data)
             rv.adapter = adapter

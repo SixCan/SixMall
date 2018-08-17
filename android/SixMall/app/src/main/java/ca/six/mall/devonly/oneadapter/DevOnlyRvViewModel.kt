@@ -2,7 +2,7 @@ package ca.six.mall.devonly.oneadapter
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import ca.six.mall.devonly.DevOnlyUser
+import ca.six.mall.devonly.pojo.DevOnlyUser
 
 class DevOnlyRvViewModel : ViewModel() {
     var data = MutableLiveData<List<DevOnlyUser>>()
