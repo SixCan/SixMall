@@ -5,7 +5,7 @@ import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import ca.six.mall.view.rv.one_binding.RvBindingViewHolder
+import ca.six.mall.view.rv.RvBindingViewHolder
 
 class OneBindingTypesAdapter(private val rows: List<BindingTypesRow<*>>)
     : RecyclerView.Adapter<RvBindingViewHolder>() {

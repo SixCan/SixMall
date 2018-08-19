@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import ca.six.mall.view.rv.RvBindingViewHolder
 
 class OneBindingAdapter<T>(var layoutResId: Int, var bindingVariable: Int, var data: List<T>? = null)
     : Adapter<RvBindingViewHolder>() {

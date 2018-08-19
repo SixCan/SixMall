@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import ca.six.mall.BR
 import ca.six.mall.R
-import ca.six.mall.databinding.ActivityDevOnlyRvBinding
 import ca.six.mall.databinding.ActivityDevOnlyTypesBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
