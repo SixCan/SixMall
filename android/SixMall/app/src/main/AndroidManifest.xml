@@ -22,6 +22,7 @@
 
         <!--<activity android:name=".biz.splash.SplashActivity"/>-->
         <!--<activity android:name=".biz.home.HomeActivity"/>-->
+        <activity android:name=".biz.my_order.MyOrderActivity"/>
 
     </application>
 
