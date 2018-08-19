@@ -10,10 +10,9 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent" android:layout_height="match_parent">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/rvMyOrders"
             android:layout_width="match_parent" android:layout_height="match_parent"
-            android:text="recyclerview" android:textSize="50dp"
             android:visibility="@{vm.isEmpty() ? View.GONE : View.VISIBLE}"
             />
 

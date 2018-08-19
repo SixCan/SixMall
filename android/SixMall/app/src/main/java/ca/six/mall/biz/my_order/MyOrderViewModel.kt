@@ -13,7 +13,7 @@ class MyOrderViewModel {
 
     private fun clearList(){
         orders.value = null
-        isEmpty.value = false
+        isEmpty.value = true
     }
 
 }
