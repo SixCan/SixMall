@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import ca.six.mall.BR
 import ca.six.mall.R
-import ca.six.mall.biz.home.solar.SolarBindingRow
+import ca.six.mall.biz.home.solar.SolarController
 import ca.six.mall.core.BaseActivity
-import ca.six.mall.databinding.ActivityDevOnlyTypesBinding
 import ca.six.mall.databinding.ActivityHomeBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
@@ -35,7 +34,7 @@ class HomeActivity : BaseActivity() {
         val list = ArrayList<BindingTypesRow<*>>()
 
         // solar menus
-        list.add(SolarBindingRow(this, R.layout.item_solar_menus, BR.view, Unit))
+        list.add(BindingTypesRow( R.layout.item_solar_menus, BR.controller, SolarController(this)))
 
 
         list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))

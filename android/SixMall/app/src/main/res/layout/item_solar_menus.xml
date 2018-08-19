@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable name="controller" type="ca.six.mall.biz.home.solar.SolarController"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -22,6 +23,7 @@
             app:planet_iconColor="#000"
             app:planet_text="My Orders"
             app:planet_textSize="15dp"
+            android:onClick="@{controller.clickMyOrders}"
             />
 
         <ca.six.mall.view.solar.PlanetView
@@ -35,6 +37,7 @@
             app:layout_constraintCircle="@id/menuOrders"
             app:layout_constraintCircleAngle="58"
             app:layout_constraintCircleRadius="140dp"
+            android:onClick="@{controller.clickTrackOrder}"
             />
 
         <ca.six.mall.view.solar.PlanetView
@@ -48,6 +51,7 @@
             app:layout_constraintCircle="@id/menuOrders"
             app:layout_constraintCircleAngle="130"
             app:layout_constraintCircleRadius="130dp"
+            android:onClick="@{controller.clickCart}"
             />
 
         <ca.six.mall.view.solar.PlanetView
@@ -61,6 +65,7 @@
             app:layout_constraintCircle="@id/menuOrders"
             app:layout_constraintCircleAngle="320"
             app:layout_constraintCircleRadius="120dp"
+            android:onClick="@{controller.clickFavorites}"
             />
 
         <ca.six.mall.view.solar.PlanetView
@@ -74,6 +79,7 @@
             app:layout_constraintCircle="@id/menuOrders"
             app:layout_constraintCircleAngle="243"
             app:layout_constraintCircleRadius="190dp"
+            android:onClick="@{controller.clickVip}"
             />
 
         <ca.six.mall.view.solar.PlanetView
@@ -87,6 +93,7 @@
             app:layout_constraintCircle="@id/menuOrders"
             app:layout_constraintCircleAngle="280"
             app:layout_constraintCircleRadius="160dp"
+            android:onClick="@{controller.clickCoupons}"
             />
 
 
