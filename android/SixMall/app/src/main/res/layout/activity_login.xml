@@ -12,9 +12,27 @@
         >
 
         <ImageView
-            android:layout_width="280dp" android:layout_height="280dp"
-            style="@style/ctlay_center"
+            android:id="@+id/ivLogo"
+            android:layout_width="100dp" android:layout_height="100dp"
+            style="@style/ctlay_centerHorizontally"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="40dp"
+            android:src="@drawable/six_logo"
+            />
+
+        <ImageView
+            android:id="@+id/ivBgFrame"
+            android:layout_width="300dp" android:layout_height="300dp"
+            style="@style/ctlay_centerHorizontally"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="80dp"
             android:src="@drawable/bg_login_frame"
+            />
+
+        <ImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="60dp" android:layout_height="60dp"
+            style="@style/ctlay_centerHorizontally"
+            app:layout_constraintTop_toTopOf="@+id/ivBgFrame" android:layout_marginTop="25dp"
+            android:src="@drawable/ic_avatar"
             />
 
     </android.support.constraint.ConstraintLayout>

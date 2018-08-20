@@ -15,4 +15,9 @@
         <item name="layout_constraintRight_toRightOf">parent</item>
     </style>
 
+    <style name="ctlay_centerHorizontally">
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+        <item name="layout_constraintRight_toRightOf">parent</item>
+    </style>
+
 </resources>
