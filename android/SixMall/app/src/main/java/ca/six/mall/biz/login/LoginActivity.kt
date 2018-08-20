@@ -29,6 +29,7 @@ class LoginActivity : BaseActivity() {
     }
 
     fun onLogin(view : View){
-        println("szw onLogin() ${viewModel.userName.value} -- ${viewModel.password.value}")
+        viewModel.login()
     }
+
 }
