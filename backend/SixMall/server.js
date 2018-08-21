@@ -2,13 +2,16 @@ var http = require('http')
 var url = require('url')
 var queryString = require('querystring')
 
-var splashApi = require('./splash/splash') // splash API
-
-var staticRes = require('./static_res')  // 请求静态图片
-
 var router = {}
-router["/splash"] = splashApi.splash
+// 请求静态图片
+var staticRes = require('./static_res') 
 router["res"] = staticRes.requestStaticRes
+
+var splashApi = require('./splash/splash')
+router["/splash"] = splashApi.splash
+var loginApi = require('./auth/login')
+router["/login"] = loginApi.login
+
 
 http.createServer(onRequest).listen(8899, function () {
       console.log("server starts up! (listen on 8899)")
@@ -16,12 +19,10 @@ http.createServer(onRequest).listen(8899, function () {
 
 
 
-/* 应对两种请求: 一种是静态文件(如图片)的请求, 返回文件; 另一种是API请求, 返回json串:
-
-a.com/123.jpg
-
-a.com/home
-a.com/item?id=123&from=3rd
+/* 应对三种请求: 
+      * 一种是静态文件(如图片)的请求, 返回文件: a.com/123.jpg
+      * 另一种是GET API请求, 返回json串: a.com/item?id=123&from=3rd
+      * 再一种就是POST API请求: a.com/login
 */
 function onRequest(req, resp) {
       var reqUrl = req.url          //=> "item?id=2&from=a" , "/", "/home", "/public/a.jpg"
@@ -37,13 +38,13 @@ function onRequest(req, resp) {
 
       console.log("szw : url = " + reqUrl + " ; api = " + apiName)
 
-      dispatch(apiName, resp)
+      dispatch(req, apiName, resp)
 }
 
-function dispatch(apiName, resp) {
+function dispatch(req, apiName, resp) {
       var target = router[apiName]
       if (typeof target === 'function') {
-            target(resp)
+            target(req, resp)
       } else {
             // TODO 有问题就sendError()
       }

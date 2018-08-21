@@ -13,15 +13,14 @@
         android:theme="@style/AppTheme">
 
         <!--<activity android:name=".biz.splash.SplashActivity">-->
-        <activity android:name=".biz.login.LoginActivity">
+        <activity android:name=".biz.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!--<activity android:name=".biz.splash.SplashActivity"/>-->
-        <!--<activity android:name=".biz.home.HomeActivity"/>-->
+        <activity android:name=".biz.home.HomeActivity"/>
         <activity android:name=".biz.my_order.MyOrderActivity"/>
 
     </application>
