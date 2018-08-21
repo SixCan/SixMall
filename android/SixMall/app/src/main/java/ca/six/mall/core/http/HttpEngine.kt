@@ -54,7 +54,6 @@ object HttpEngine {
                     val payload = respJson.opt("payload") as JSONObject
                     onResp(payload)
                 } else {
-//                    onResp(respJson, code)
                     val errorMsg = respJson.optString("msg")
                     // run on the main thread
                     BaseApp.handler.post {
