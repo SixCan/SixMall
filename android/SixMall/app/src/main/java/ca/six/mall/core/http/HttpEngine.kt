@@ -8,6 +8,8 @@ import java.io.IOException
 
 
 object HttpEngine {
+    val CODE_SUCCESS = 200
+
     // for dev-only
     var isMock = false
     var mockJson = ""
@@ -25,7 +27,7 @@ object HttpEngine {
     // kotlin比python好, 有默认值的参数不用在最后
     fun request(apiName: String,
                 formData : RequestBody? = null,
-                @WorkerThread onResp: (payload: JSONObject) -> Unit
+                @WorkerThread onResp: (payload: JSONObject, errorCode : Int) -> Unit
                 ) {
         val requestBuilder = Request.Builder()
                 .url(PREFIX + apiName)
@@ -43,9 +45,16 @@ object HttpEngine {
 
             override fun onResponse(call: Call, resp: Response) {
                 val respStr = resp.body()?.string() ?: "" // 三目运算符
-                println("szw $respStr")
-                val payload = JSONObject(respStr).get("payload") as JSONObject
-                onResp(payload)
+                val respJson = JSONObject(respStr)
+
+                val code = respJson.optInt("code")
+
+                if(code == CODE_SUCCESS) {
+                    val payload = respJson.opt("payload") as JSONObject
+                    onResp(payload, CODE_SUCCESS)
+                } else {
+                    onResp(respJson, code)
+                }
             }
 
         })

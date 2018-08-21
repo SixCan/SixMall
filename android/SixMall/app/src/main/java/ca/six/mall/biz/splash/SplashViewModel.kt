@@ -9,9 +9,13 @@ class SplashViewModel : ViewModel() {
     val url = MutableLiveData<String>()
 
     fun init() {
-        HttpEngine.request("splash") { payload -> // worker thread
-            val imgUrl = payload.get("imgUrl") as String
-            url.postValue(imgUrl)
+        HttpEngine.request("splash") { payload, errorCode -> // worker thread
+            if(errorCode != HttpEngine.CODE_SUCCESS){
+                
+            } else {
+                val imgUrl = payload.get("imgUrl") as String
+                url.postValue(imgUrl)
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 function getResponse(resp, content) {
       resp.writeHead(200, {'Content-Type' : 'application/json'})
-      var json = '{"code":100,"msg":"success","payload":{' + content + '}}'
+      var json = '{"code":200,"msg":"success","payload":{' + content + '}}'
       resp.end(json)
 }
 
