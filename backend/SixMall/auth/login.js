@@ -15,11 +15,14 @@ function onRequest(req, resp) {
             var userName = parsedArgs['name']
             var password = parsedArgs['pwd']
 
+            console.log('szw pwd(req) = '+password)
             var pwdInDb = userDatabase[userName]
+            console.log('szw pwd(resp) = '+pwdInDb)
+            console.log('szw compare? = ' + (pwdInDb != password))
             if (pwdInDb != password) {
-                  utils.succResp(resp, '"isSuccessful": "true"')
-            } else {
                   utils.errResp(resp, 9001, "Wrong username and password combination")
+            } else {
+                  utils.succResp(resp, '"isSuccessful": "true"')
             }
 
       })

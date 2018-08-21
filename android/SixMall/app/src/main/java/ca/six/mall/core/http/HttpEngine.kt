@@ -43,6 +43,7 @@ object HttpEngine {
 
             override fun onResponse(call: Call, resp: Response) {
                 val respStr = resp.body()?.string() ?: "" // 三目运算符
+                println("szw $respStr")
                 val payload = JSONObject(respStr).get("payload") as JSONObject
                 onResp(payload)
             }
