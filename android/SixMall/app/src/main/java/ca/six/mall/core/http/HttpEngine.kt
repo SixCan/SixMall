@@ -56,7 +56,11 @@ object HttpEngine {
                 } else {
 //                    onResp(respJson, code)
                     val errorMsg = respJson.optString("msg")
-                    showToast("error: ${errorMsg}")
+                    // run on the main thread
+                    BaseApp.handler.post {
+                        showToast("error: ${errorMsg}")
+                    }
+
                 }
             }
 

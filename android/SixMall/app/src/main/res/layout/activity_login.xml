@@ -58,6 +58,7 @@
             android:layout_width="260dp" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/ivAvatar" android:layout_marginTop="40dp"
             style="@style/ctlay_centerHorizontally"
+            android:singleLine="true"
             android:hint="user name"
             android:text="@={vm.userName}"
             />
@@ -68,7 +69,8 @@
             android:layout_width="260dp" android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/etName" android:layout_marginTop="9dp"
             style="@style/ctlay_centerHorizontally"
-            android:hint="password"
+            android:singleLine="true"
+            android:hint="password" android:inputType="textPassword"
             android:text="@={vm.password}"
             />
 
