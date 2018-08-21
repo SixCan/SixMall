@@ -2,6 +2,7 @@ package ca.six.mall.core.http
 
 import android.support.annotation.WorkerThread
 import ca.six.mall.core.BaseApp
+import ca.six.tomato.util.showToast
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -27,7 +28,7 @@ object HttpEngine {
     // kotlin比python好, 有默认值的参数不用在最后
     fun request(apiName: String,
                 formData : RequestBody? = null,
-                @WorkerThread onResp: (payload: JSONObject, errorCode : Int) -> Unit
+                @WorkerThread onResp: (payload: JSONObject) -> Unit
                 ) {
         val requestBuilder = Request.Builder()
                 .url(PREFIX + apiName)
@@ -51,9 +52,11 @@ object HttpEngine {
 
                 if(code == CODE_SUCCESS) {
                     val payload = respJson.opt("payload") as JSONObject
-                    onResp(payload, CODE_SUCCESS)
+                    onResp(payload)
                 } else {
-                    onResp(respJson, code)
+//                    onResp(respJson, code)
+                    val errorMsg = respJson.optString("msg")
+                    showToast("error: ${errorMsg}")
                 }
             }
 
