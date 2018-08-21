@@ -21,10 +21,20 @@ object HttpEngine {
                 .build()
     }
 
-    fun request(apiName: String, @WorkerThread onResp: (payload: JSONObject) -> Unit) {
-        val req = Request.Builder()
+
+    // kotlin比python好, 有默认值的参数不用在最后
+    fun request(apiName: String,
+                formData : RequestBody? = null,
+                @WorkerThread onResp: (payload: JSONObject) -> Unit
+                ) {
+        val requestBuilder = Request.Builder()
                 .url(PREFIX + apiName)
-                .build()
+
+        if(formData != null){
+            requestBuilder.post(formData)
+        }
+
+        val req = requestBuilder.build()
 
         http.newCall(req).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
