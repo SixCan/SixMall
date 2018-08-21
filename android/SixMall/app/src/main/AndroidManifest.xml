@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".biz.error.ErrorActivity"/>
+
         <activity android:name=".biz.home.HomeActivity"/>
         <activity android:name=".biz.my_order.MyOrderActivity"/>
 

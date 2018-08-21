@@ -1,15 +1,14 @@
-package ca.six.mall.core.router
+package ca.six.mall.core.router.precondition
 
-import android.app.Activity
 import ca.six.mall.biz.login.LoginActivity
 import ca.six.mall.core.auth.UserManager
 
 class LoginPrecondition : IPrecondition {
-    override fun isMatching(): Class<out Activity>? {
+    override fun isMatching(): FilterResult {
         if(UserManager.isLogin){
-            return null
+            return EmptyFilterResult()
         } else {
-            return LoginActivity::class.java
+            return FilterResult(LoginActivity::class.java)
         }
     }
 }

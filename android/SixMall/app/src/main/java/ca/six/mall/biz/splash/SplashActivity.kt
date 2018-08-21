@@ -9,6 +9,7 @@ import android.os.Message
 import ca.six.mall.R
 import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
+import ca.six.mall.core.router.Router
 import ca.six.mall.databinding.ActivitySplashBinding
 import ca.six.mall.util.nav
 
@@ -35,6 +36,7 @@ class SplashActivity : BaseActivity() {
         override fun handleMessage(msg: Message) {
             if (msg.what == ACTION_ID_SPLASH_DONE) {
                 this@SplashActivity.nav(HomeActivity::class.java)
+//                Router.nav(this@SplashActivity, HomeActivity::class.java )
                 this@SplashActivity.finish()
             }
         }

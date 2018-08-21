@@ -2,7 +2,7 @@ package ca.six.mall.util
 
 import android.app.Activity
 import android.content.Intent
-import ca.six.mall.core.router.IPrecondition
+import ca.six.mall.core.router.precondition.IPrecondition
 
 fun Activity.nav(clz: Class<out Any>) {
     val it = Intent(this, clz)
