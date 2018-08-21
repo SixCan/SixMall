@@ -3,7 +3,8 @@ var utils = require('../mall_utils')
 var postUtils = require('../post')
 
 function onRequest(req, resp) {
-      var postData = postUtils.getPost(req)
-      console.log('szw post data = ' + postData)
+      postUtils.getPost(req, function(postData){
+            console.log('szw post data = ' + postData)
+      })
 }
 exports.login = onRequest
