@@ -8,7 +8,7 @@ class SolarController(val activity : Activity) {
 
     fun clickMyOrders(v : View){
         //TODO 后续要加上登录判断
-        nav(activity, "myOrders")
+        nav(activity, "login/myOrders")
     }
 
     fun clickCart(v : View){

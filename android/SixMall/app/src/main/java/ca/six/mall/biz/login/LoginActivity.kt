@@ -1,5 +1,6 @@
 package ca.six.mall.biz.login
 
+import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,10 @@ import ca.six.mall.databinding.ActivityLoginBinding
 import ca.six.mall.util.dp2px
 import ca.six.tomato.util.getCircleBitmap
 import ca.six.tomato.util.getVectorBitmap
+import com.thejoyrun.router.Router
+import com.thejoyrun.router.RouterActivity
 
+@RouterActivity("login")
 class LoginActivity : BaseActivity() {
     val viewModel : LoginViewModel = LoginViewModel()
 
@@ -26,6 +30,13 @@ class LoginActivity : BaseActivity() {
         val circleAvatar = getCircleBitmap(originalAvata, originalAvata.width / 2f)
         binding.ivAvatar.setImageBitmap(circleAvatar)
         originalAvata.recycle()
+
+        viewModel.loginSucc.observe(this, object : Observer<Unit>{
+            override fun onChanged(t: Unit?) {
+                println("login activity Router.inject()")
+                Router.inject(this@LoginActivity)
+            }
+        })
     }
 
     fun onLogin(view : View){
