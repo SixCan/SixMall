@@ -3,6 +3,7 @@ package ca.six.mall.core
 import android.app.Application
 import android.content.Context
 import android.os.Handler
+import com.thejoyrun.router.Router
 import kotlin.properties.Delegates
 
 class BaseApp : Application() {
@@ -15,5 +16,8 @@ class BaseApp : Application() {
     override fun onCreate() {
         super.onCreate()
         appContext = this
+
+        Router.init("sixmall")  //router scheme
+
     }
 }

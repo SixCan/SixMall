@@ -11,8 +11,10 @@ import ca.six.mall.databinding.ActivityHomeBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
 import ca.six.mall.view.rv.one_binding_types.BindingTypesRow
+import com.thejoyrun.router.RouterActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
+@RouterActivity("home")
 class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

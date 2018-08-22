@@ -7,12 +7,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import ca.six.mall.R
-import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.core.BaseActivity
-import ca.six.mall.core.router.Router
 import ca.six.mall.databinding.ActivitySplashBinding
 import ca.six.mall.util.nav
+import com.thejoyrun.router.Router
+import com.thejoyrun.router.RouterActivity
 
+@RouterActivity("splash")
 class SplashActivity : BaseActivity() {
     val ACTION_ID_SPLASH_DONE = 11
     val DURATION_SPLASH = 2000L
@@ -35,8 +36,7 @@ class SplashActivity : BaseActivity() {
     object : Handler() {
         override fun handleMessage(msg: Message) {
             if (msg.what == ACTION_ID_SPLASH_DONE) {
-                this@SplashActivity.nav(HomeActivity::class.java)
-//                Router.nav(this@SplashActivity, HomeActivity::class.java )
+                nav(this@SplashActivity, "home")
                 this@SplashActivity.finish()
             }
         }

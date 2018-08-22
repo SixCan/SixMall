@@ -5,7 +5,9 @@ import android.os.Bundle
 import ca.six.mall.R
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.databinding.ActivityMyOrderBinding
+import com.thejoyrun.router.RouterActivity
 
+@RouterActivity("myOrders")
 class MyOrderActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
