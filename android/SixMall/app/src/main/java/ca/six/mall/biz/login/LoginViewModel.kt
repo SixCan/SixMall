@@ -25,7 +25,7 @@ class LoginViewModel {
 
         HttpEngine.request("login", formData) { payload ->
             println("szw loginVm $payload")
-            loginSucc.call()
+            loginSucc.call_()
         }
     }
 }

@@ -60,6 +60,8 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         });
     }
 
+
+
     @MainThread
     public void setValue(@Nullable T t) {
         mPending.set(true);
@@ -75,6 +77,19 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         setValue(null);
     }
 
+
+
+    @WorkerThread
+    @Override
+    public void postValue(T value) {
+        mPending.set(true);
+        super.postValue(value);
+    }
+
+    @WorkerThread
+    public void call_(){
+        postValue(null);
+    }
 
 
 }
