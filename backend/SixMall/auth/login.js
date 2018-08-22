@@ -1,4 +1,4 @@
-var path = require('path')
+var globals = require('../globals')
 var utils = require('../mall_utils')
 var postUtils = require('../post')
 var queryString = require('querystring')
@@ -15,14 +15,13 @@ function onRequest(req, resp) {
             var userName = parsedArgs['name']
             var password = parsedArgs['pwd']
 
-            console.log('szw pwd(req) = '+password)
             var pwdInDb = userDatabase[userName]
-            console.log('szw pwd(resp) = '+pwdInDb)
-            console.log('szw compare? = ' + (pwdInDb != password))
             if (pwdInDb != password) {
                   utils.errResp(resp, 9001, "Wrong username and password combination")
             } else {
-                  utils.succResp(resp, '"isSuccessful": "true"')
+                  var sessionId = utils.generateSessionId()
+                  sessions[sessionId] = userName
+                  utils.succResp(resp, '"sessionId": "' + sessionId + '"')
             }
 
       })

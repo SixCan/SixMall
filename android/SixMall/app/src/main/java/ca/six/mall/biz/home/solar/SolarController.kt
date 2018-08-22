@@ -8,7 +8,6 @@ import ca.six.mall.util.navAuth
 class SolarController(val activity : Activity) {
 
     fun clickMyOrders(v : View){
-        //TODO 后续要加上登录判断
         navAuth(activity, "myOrders")
     }
 
