@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "SixMall"
+		},
+		{
+			"path": "/Users/songzhw/code/mine/Learn-Server/NodeJs/db"
 		}
 	]
 }

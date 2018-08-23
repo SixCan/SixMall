@@ -18,7 +18,8 @@ class LoginViewModel {
     fun login() {
         val name = userName.value
         val pwd = password.value
-        val pwdInSha = pwd?.sha512()
+        val pwdSalt = "biu-gO82nx_d" + pwd +"_8dnx0%sdc"
+        val pwdInSha = pwdSalt.sha512()
 
         val formData = FormBody.Builder()
                 .add("name", name)

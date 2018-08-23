@@ -5,8 +5,8 @@ var queryString = require('querystring')
 
 // Renran4, 594szw
 var userDatabase = {
-      'renran': 'cfe3d11e25d864f9c5370ac839062c83e014ae261b5d7f8029348c448939780b5f3136f5974bf4d9219d6e742069ddf7860ecc1ca6b9e27d7b5ca3d259b4c5fc',
-      'szw': '54c57e3b29df8a913897885eb7706a70c41776ba20bfddadab21bf728b2be84966344b92f47fed2ceac37df8a3be9dd2d856cdf064a3df6beb984c8a83ecb349'
+      'renran': 'ca4b2fbde5891f461a1c30c76dd18d71692ebe11d7e470acf1cd7e487267d3ed33bd3e56cb7d84e51ca44c263fcec125a04123d6850b5bc0b2ce682a8cb79069',
+      'szw': 'd9f4e9e7235040a223d972a53ee78289e88e75ff4ac3d7101fdc57c0de099aa7b490331aefb7ef2c5b06d7c3ef5eca664fb529d5ed0f09d7eb1d6220a4116a47'
 }
 
 function onRequest(req, resp) {
