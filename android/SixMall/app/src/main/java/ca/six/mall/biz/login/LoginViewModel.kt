@@ -27,9 +27,8 @@ class LoginViewModel {
                 .build()
 
         HttpEngine.request("login", formData) { payload : JSONObject->
-            println("szw $payload")
             val sessionId = payload.optString("sessionId")
-            UserManager.sessionId = sessionId
+            UserManager.onLoggedin(sessionId)
             loginSucc.call_()
         }
     }

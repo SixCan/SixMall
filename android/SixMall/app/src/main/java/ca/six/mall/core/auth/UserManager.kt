@@ -1,17 +1,21 @@
 package ca.six.mall.core.auth
 
+import ca.six.mall.data.event.LoginEvent
+import org.greenrobot.eventbus.EventBus
+
 object UserManager {
     var isLogin = false
     var isVip = false
     var sessionId = ""
 
     fun logout(){
-        isLogin = false
+        this.isLogin = false
     }
 
-    fun onLoggedin(){
-        isLogin = true
-        //TODO may have observer to observe on the login action
+    fun onLoggedin(sessionId : String){
+        this.isLogin = true
+        this.sessionId = sessionId
+        EventBus.getDefault().post(LoginEvent())
     }
 
 

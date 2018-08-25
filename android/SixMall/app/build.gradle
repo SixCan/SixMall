@@ -48,7 +48,7 @@ dependencies {
     implementation 'ca.six.util:Permisssion6:1.0.1'
     implementation 'ca.six.util:LogUtil:1.0.1'
 
-    implementation 'de.greenrobot:eventbus:2.4.0'
+    implementation "org.greenrobot:eventbus:3.1.1"
 
     // 不选用Glide, 是因为其方法数有近2500; 功能更强大且可定制, 但我没需求. 所以选用更小的Picasso.
     implementation ('com.squareup.picasso:picasso:2.71828') {

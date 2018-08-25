@@ -7,12 +7,16 @@ import ca.six.mall.BR
 import ca.six.mall.R
 import ca.six.mall.biz.home.solar.SolarController
 import ca.six.mall.core.BaseActivity
+import ca.six.mall.data.event.LoginEvent
 import ca.six.mall.databinding.ActivityHomeBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
 import ca.six.mall.view.rv.one_binding_types.BindingTypesRow
 import com.thejoyrun.router.RouterActivity
 import kotlinx.android.synthetic.main.activity_home.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 @RouterActivity("home")
 class HomeActivity : BaseActivity() {
@@ -30,6 +34,13 @@ class HomeActivity : BaseActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
+
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 
     fun rows(): List<BindingTypesRow<*>> {
@@ -49,5 +60,11 @@ class HomeActivity : BaseActivity() {
         list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "xx", false)))
         list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "dd", false)))
         return list
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: LoginEvent){
+        println("szw on login event get received")
     }
 }

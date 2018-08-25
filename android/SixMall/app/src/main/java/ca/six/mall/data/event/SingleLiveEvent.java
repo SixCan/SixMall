@@ -78,7 +78,7 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
     }
 
 
-
+    /** Call this when on the main thread */
     @WorkerThread
     @Override
     public void postValue(T value) {
@@ -86,6 +86,7 @@ public class SingleLiveEvent<T> extends MutableLiveData<T> {
         super.postValue(value);
     }
 
+    /** Call this when on a worker thread */
     @WorkerThread
     public void call_(){
         postValue(null);
