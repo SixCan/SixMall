@@ -20,13 +20,17 @@ import org.greenrobot.eventbus.ThreadMode
 
 @RouterActivity("home")
 class HomeActivity : BaseActivity() {
+    private val SOLAR_IN_RV_POSITION = 0
+
+    private lateinit var binding : ActivityHomeBinding
+    private lateinit var solarController: SolarController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
 
-        val binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
+        binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
         binding.view = this
         binding.setLifecycleOwner(this)
@@ -47,7 +51,8 @@ class HomeActivity : BaseActivity() {
         val list = ArrayList<BindingTypesRow<*>>()
 
         // solar menus
-        list.add(BindingTypesRow( R.layout.item_solar_menus, BR.controller, SolarController(this)))
+        solarController = SolarController(this)
+        list.add(BindingTypesRow( R.layout.item_solar_menus, BR.controller, solarController))
 
 
         list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
@@ -66,5 +71,11 @@ class HomeActivity : BaseActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: LoginEvent){
         println("szw on login event get received")
+        solarController.isLogin = true
+        binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
+
+
+    // TODO logout event
+
 }
