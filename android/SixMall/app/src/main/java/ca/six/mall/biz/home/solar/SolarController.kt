@@ -2,6 +2,7 @@ package ca.six.mall.biz.home.solar
 
 import android.app.Activity
 import android.view.View
+import ca.six.mall.core.auth.UserManager
 import ca.six.mall.util.nav
 import ca.six.mall.util.navAuth
 
@@ -13,6 +14,8 @@ class SolarController(val activity : Activity) {
 
     fun clickCart(v : View){
         println("szw click cart")
+        //TODO delete later (放这是方便测试)
+        UserManager.logout()
     }
 
     fun clickTrackOrder(v : View){

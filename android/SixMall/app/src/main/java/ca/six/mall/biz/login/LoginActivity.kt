@@ -35,7 +35,7 @@ class LoginActivity : BaseActivity() {
         // when login succeed:
         viewModel.loginSucc.observe(this, object : Observer<Unit>{
             override fun onChanged(t: Unit?) {
-                UserManager.isLogin = true
+                UserManager.onLoggedin()
                 Router.inject(this@LoginActivity)
                 this@LoginActivity.finish()
             }
