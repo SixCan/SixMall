@@ -8,6 +8,7 @@ import ca.six.mall.R
 import ca.six.mall.biz.home.solar.SolarController
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.data.event.LoginEvent
+import ca.six.mall.data.event.LogoutEvent
 import ca.six.mall.databinding.ActivityHomeBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
@@ -70,12 +71,15 @@ class HomeActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: LoginEvent){
-        println("szw on login event get received")
         solarController.isLogin = true
         binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEvent(event: LogoutEvent){
+        solarController.isLogin = false
+        binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
+    }
 
-    // TODO logout event
 
 }

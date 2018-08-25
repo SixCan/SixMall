@@ -22,9 +22,6 @@ class SolarController(val activity : Activity) {
     }
 
     fun clickCart(v : View){
-        println("szw click cart")
-        //TODO delete later (放这是方便测试)
-        UserManager.logout()
     }
 
     fun clickTrackOrder(v : View){

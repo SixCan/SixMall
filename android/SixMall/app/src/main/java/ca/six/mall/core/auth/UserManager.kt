@@ -1,20 +1,25 @@
 package ca.six.mall.core.auth
 
 import ca.six.mall.data.event.LoginEvent
+import ca.six.mall.data.event.LogoutEvent
+import ca.six.tomato.util.showToast
 import org.greenrobot.eventbus.EventBus
 
 object UserManager {
     var isLogin = false
     var isVip = false
-    var sessionId = ""
+    var session = ""
 
     fun logout(){
         this.isLogin = false
+        this.session = ""
+        showToast("You have logged out!")
+        EventBus.getDefault().post(LogoutEvent())
     }
 
     fun onLoggedin(sessionId : String){
         this.isLogin = true
-        this.sessionId = sessionId
+        this.session = sessionId
         EventBus.getDefault().post(LoginEvent())
     }
 

@@ -10,7 +10,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="276dp"
-        android:background="#dce"
         >
 
         <ca.six.mall.view.solar.PlanetView
