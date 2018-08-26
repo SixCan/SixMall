@@ -3,7 +3,9 @@ package ca.six.mall.core
 import android.app.Application
 import android.content.Context
 import android.os.Handler
+import ca.six.mall.SixMallEventBusIndex
 import com.thejoyrun.router.Router
+import org.greenrobot.eventbus.EventBus
 import kotlin.properties.Delegates
 
 class BaseApp : Application() {
@@ -18,6 +20,11 @@ class BaseApp : Application() {
         appContext = this
 
         Router.init("sixmall")  //router scheme
+
+        // config EventBus. Adding indexes to make EventBus act more quickly
+        EventBus.builder()
+                .addIndex(SixMallEventBusIndex())
+                .installDefaultEventBus()
 
     }
 }

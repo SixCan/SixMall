@@ -49,6 +49,7 @@ dependencies {
     implementation 'ca.six.util:LogUtil:1.0.1'
 
     implementation "org.greenrobot:eventbus:3.1.1"
+    kapt 'org.greenrobot:eventbus-annotation-processor:3.1.1'
 
     // 不选用Glide, 是因为其方法数有近2500; 功能更强大且可定制, 但我没需求. 所以选用更小的Picasso.
     implementation ('com.squareup.picasso:picasso:2.71828') {
@@ -71,4 +72,11 @@ dependencies {
 
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+
+kapt {
+    arguments {
+        arg('eventBusIndex', 'ca.six.mall.SixMallEventBusIndex')
+    }
 }
