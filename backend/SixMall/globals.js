@@ -1,1 +1,1 @@
-global.sessions = {}
+// global.sessions = {}

@@ -1,5 +1,3 @@
-var globals = require('../globals')  //显示没用. 其实有用. 因为要初始化好globals中的session对象. 不可以删除此句
-
 var utils = require('../utils/mall_utils')
 var postUtils = require('../post')
 var queryString = require('querystring')
@@ -33,6 +31,7 @@ function onRequest(req, resp) {
                   })
                   .then( (result) => {
                         console.log(sessionId)
+                        //TODO redis.set(sessionId)
                         utils.succResp(resp, '"sessionId": "' + sessionId + '"')
                   })
       })

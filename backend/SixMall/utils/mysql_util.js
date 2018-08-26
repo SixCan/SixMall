@@ -1,3 +1,5 @@
+// terminate :  > mysql -u root -p
+
 var mysqlClient = require('mysql')
 var Q = require('bluebird')
 

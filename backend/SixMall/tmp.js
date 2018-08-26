@@ -1,4 +1,17 @@
-/* 发现不调用connect()方法也行! */
+const redis = require('./utils/redis_util')
+
+redis. select(1)
+
+redis.getAsync('name2')
+      .then( (result) => {
+            console.log(result) //=> szw
+            redis.quit()
+      })
+
+/* [MySQL]
+
+// 发现mysql不调用connect()方法也行! 
+
 const mysql = require('./utils/mysql_util')
 
 mysql.queryAsync("select * from users")
@@ -31,3 +44,5 @@ mysql.queryAsync(querySql, queryParams)
       })
 
 mysql.end()
+
+*/
