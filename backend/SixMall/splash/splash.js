@@ -1,5 +1,5 @@
 var path = require('path')
-var utils = require('../mall_utils')
+var utils = require('../utils/mall_utils')
 
 // TODO 后续splash不直接返回图片, 改为返回图片url, 让client端自己去加载图片
 

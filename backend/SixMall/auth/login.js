@@ -1,7 +1,7 @@
-var globals = require('../globals')
-var utils = require('../mall_utils')
+var utils = require('../utils/mall_utils')
 var postUtils = require('../post')
 var queryString = require('querystring')
+var globals = require('../globals')  //显示没用. 其实有用. 因为要初始化好globals中的session对象. 不可以删除此句
 
 // Renran4, 594szw
 var userDatabase = {
@@ -15,7 +15,7 @@ function onRequest(req, resp) {
             var userName = parsedArgs['name']
             var password = parsedArgs['pwd']
 
-            var pwdInDb = userDatabase[userName]
+            var pwdInDb = userDatabase[userName] //TODO 从db中取来
             if (pwdInDb != password) {
                   utils.errResp(resp, 9001, "Wrong username and password combination")
             } else {
