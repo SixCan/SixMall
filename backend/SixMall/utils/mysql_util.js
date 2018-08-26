@@ -10,6 +10,7 @@ var mysql = mysqlClient.createConnection({
       password: '594_zheYoung',
       database: 'sixmall'
 })
-mysql.connect()
 
+
+module.exports = mysql
 

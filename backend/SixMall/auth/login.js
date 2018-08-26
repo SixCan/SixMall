@@ -1,7 +1,10 @@
+var globals = require('../globals')  //显示没用. 其实有用. 因为要初始化好globals中的session对象. 不可以删除此句
+
 var utils = require('../utils/mall_utils')
 var postUtils = require('../post')
 var queryString = require('querystring')
-var globals = require('../globals')  //显示没用. 其实有用. 因为要初始化好globals中的session对象. 不可以删除此句
+
+const mysql = require('./utils/mysql_util')
 
 // Renran4, 594szw
 var userDatabase = {
