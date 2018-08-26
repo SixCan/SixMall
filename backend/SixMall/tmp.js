@@ -3,14 +3,31 @@ const mysql = require('./utils/mysql_util')
 
 mysql.queryAsync("select * from users")
       .then( (result) => {
+            console.log("\n")
             console.log(result)
       })
 
 mysql.queryAsync("select uid,name,session from users")
       .then( (result) => {
+            console.log("\n")
             console.log(result)
       })
 
+mysql.queryAsync("select uid,name,session from users")
+      .then( (rows) => {
+            console.log("\n")
+            console.log(rows[0].name)
+            console.log(rows[1].name)
+            console.log(rows[1].uid)
+      })
 
+var querySql = "SELECT uid, name, pwd FROM users where name = ?"
+var queryParams = ['szw']
+mysql.queryAsync(querySql, queryParams)
+      .then( (rows) => {
+            console.log("\n")
+            console.log(rows)
+            console.log(rows[0].name)
+      })
 
-// mysql.end()
+mysql.end()

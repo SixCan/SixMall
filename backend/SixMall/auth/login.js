@@ -4,13 +4,9 @@ var utils = require('../utils/mall_utils')
 var postUtils = require('../post')
 var queryString = require('querystring')
 
-const mysql = require('./utils/mysql_util')
+const mysql = require('../utils/mysql_util')
 
-// Renran4, 594szw
-var userDatabase = {
-      'renran': 'ca4b2fbde5891f461a1c30c76dd18d71692ebe11d7e470acf1cd7e487267d3ed33bd3e56cb7d84e51ca44c263fcec125a04123d6850b5bc0b2ce682a8cb79069',
-      'szw': 'd9f4e9e7235040a223d972a53ee78289e88e75ff4ac3d7101fdc57c0de099aa7b490331aefb7ef2c5b06d7c3ef5eca664fb529d5ed0f09d7eb1d6220a4116a47'
-}
+var sessionId = ""
 
 function onRequest(req, resp) {
       postUtils.getPost(req, function (postData) {
@@ -18,17 +14,28 @@ function onRequest(req, resp) {
             var userName = parsedArgs['name']
             var password = parsedArgs['pwd']
 
-            var pwdInDb = userDatabase[userName] //TODO 从db中取来
-            if (pwdInDb != password) {
-                  utils.errResp(resp, 9001, "Wrong username and password combination")
-            } else {
-                  var sessionId = utils.generateSessionId()
-                  sessions[sessionId] = userName
-                  utils.succResp(resp, '"sessionId": "' + sessionId + '"')
-            }
+            var querySql = "SELECT uid, name, pwd FROM users where name = ?"
+            var queryParams = [userName]
+            mysql.queryAsync(querySql, queryParams)
+                  .then( (rows) => {
+                        console.log("\n")
+                        console.log(rows)
+                        var pwdInDb = rows[0].pwd
+                        if (pwdInDb != password) {
+                              utils.errResp(resp, 9001, "Wrong username and password combination")
+                        } else {
+                              sessionId = utils.generateSessionId()
 
+                              var modifySql = "UPDATE users SET session = ? WHERE name = ?"
+                              var modifyParams = [sessionId, userName]
+                              return mysql.query(modifySql, modifyParams)
+                        }
+                  })
+                  .then( (result) => {
+                        console.log(sessionId)
+                        utils.succResp(resp, '"sessionId": "' + sessionId + '"')
+                  })
       })
-      //TODO 后续考虑使用数据库
 
 }
 exports.login = onRequest
