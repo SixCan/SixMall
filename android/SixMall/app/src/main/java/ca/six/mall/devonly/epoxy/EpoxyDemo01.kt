@@ -15,5 +15,8 @@ class EpoxyDemo01 : AppCompatActivity() {
 
         val controller = EpoxyDemoController01()
         rvEpoxy.setController(controller)
+
+        rvEpoxy.adapter = controller.adapter
+        controller.requestModelBuild()
     }
 }
