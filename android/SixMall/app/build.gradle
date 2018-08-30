@@ -61,6 +61,9 @@ dependencies {
     implementation 'com.github.joyrun.ActivityRouter:router:0.6.2'
     kapt 'com.github.joyrun.ActivityRouter:router-compiler:0.6.2'
 
+    implementation 'com.airbnb.android:epoxy:2.16.2'
+    kapt "com.airbnb.android:epoxy-processor:2.16.2"
+
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
 
@@ -76,7 +79,11 @@ dependencies {
 
 
 kapt {
+    // GreenRobot/EventBus3.x
     arguments {
         arg('eventBusIndex', 'ca.six.mall.SixMallEventBusIndex')
     }
+
+    // Airbnb/Epoxy. So the `AutoModel` annotation work properly.
+    correctErrorTypes = true
 }
