@@ -3,6 +3,7 @@ package ca.six.mall.devonly.epoxy.viewholder
 import android.support.annotation.DrawableRes
 import android.view.View
 import ca.six.mall.R
+import ca.six.mall.view.epoxy.EpoxyViewHolder
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder

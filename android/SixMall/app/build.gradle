@@ -63,6 +63,7 @@ dependencies {
 
     implementation 'com.airbnb.android:epoxy:2.16.2'
     kapt "com.airbnb.android:epoxy-processor:2.16.2"
+    implementation 'com.airbnb.android:epoxy-databinding:2.16.2'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"

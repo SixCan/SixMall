@@ -1,4 +1,4 @@
-package ca.six.mall.devonly.epoxy.viewholder
+package ca.six.mall.view.epoxy
 
 import android.support.annotation.DrawableRes
 import android.support.v4.util.SparseArrayCompat
