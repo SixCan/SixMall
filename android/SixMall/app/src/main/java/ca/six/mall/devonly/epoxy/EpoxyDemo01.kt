@@ -11,12 +11,12 @@ class EpoxyDemo01 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dev_only_epoxy_rv_one)
 
-        rvEpoxy.layoutManager = LinearLayoutManager(this)
-
+        val data = List(12) { i -> "Item $i" }
         val controller = EpoxyDemoController01()
-        rvEpoxy.setController(controller)
+        controller.setData(data)
 
-        rvEpoxy.adapter = controller.adapter
-        controller.requestModelBuild()
+        rvEpoxy.layoutManager = LinearLayoutManager(this)
+        rvEpoxy.setController(controller)  // 自带rv.setAdapter(controller.adapter)
+
     }
 }

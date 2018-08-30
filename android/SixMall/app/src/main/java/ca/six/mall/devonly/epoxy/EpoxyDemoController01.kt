@@ -1,13 +1,22 @@
 package ca.six.mall.devonly.epoxy
 
 import com.airbnb.epoxy.AutoModel
-import com.airbnb.epoxy.Typed2EpoxyController
+import com.airbnb.epoxy.TypedEpoxyController
 
-class EpoxyDemoController01 : Typed2EpoxyController<Unit, String>() {
-    @AutoModel lateinit var header : HeaderViewModel_
-    @AutoModel lateinit var content : ContentViewModel_
+class EpoxyDemoController01 : TypedEpoxyController<List<CharSequence>>() {
+    @AutoModel
+    lateinit var header: HeaderViewModel_
 
-    override fun buildModels(data1: Unit, data2: String) {
-        content.content(data2)
+    override fun buildModels(data: List<CharSequence>) {
+        header.addTo(this)
+
+        for (str in data) {
+            ContentViewModel_()
+                    .content(str)
+                    .addTo(this)
+        }
+
     }
+
+
 }
