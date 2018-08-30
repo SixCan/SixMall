@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <!--<activity android:name=".biz.splash.SplashActivity">-->
-        <activity android:name=".devonly.epoxy.binding.ExposyDemo03">
+        <activity android:name=".biz.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

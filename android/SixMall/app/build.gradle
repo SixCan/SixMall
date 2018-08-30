@@ -61,12 +61,11 @@ dependencies {
     implementation 'com.github.joyrun.ActivityRouter:router:0.6.2'
     kapt 'com.github.joyrun.ActivityRouter:router-compiler:0.6.2'
 
-
-    implementation 'com.airbnb.android:epoxy:2.16.2'
-    kapt "com.airbnb.android:epoxy-processor:2.16.2"
-
-    implementation 'com.airbnb.android:epoxy-databinding:2.16.2'
-    kapt "com.android.databinding:compiler:$android_plugin_version"
+    // Epoxy has an issue when working with databinding.v2
+//    implementation 'com.airbnb.android:epoxy:2.16.2'
+//    kapt "com.airbnb.android:epoxy-processor:2.16.2"
+//    implementation 'com.airbnb.android:epoxy-databinding:2.16.2'
+//    kapt "com.android.databinding:compiler:$android_plugin_version"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
