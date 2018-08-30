@@ -13,7 +13,7 @@ import com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash
 @EpoxyModelClass(layout = R.layout.item_dev_only_header_vh)
 abstract class Header2Model : EpoxyModelWithHolder<EpoxyViewHolder>() {
 
-    @EpoxyAttribute @DrawableRes val imgResId : Int = 0
+    @EpoxyAttribute @DrawableRes var imgResId : Int = 0
 
     @EpoxyAttribute(DoNotHash) lateinit var clickListener: View.OnClickListener
 

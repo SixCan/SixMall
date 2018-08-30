@@ -13,5 +13,11 @@ class ExposyDemo02 : AppCompatActivity() {
 
         rvEpoxy.layoutManager = LinearLayoutManager(this)
 
+        val data = List(12) { i -> "ViewHolder Item $i" }
+        val controller = EpoxyVhController()
+        controller.setData(R.drawable.dev_only_westlake, data)
+
+        rvEpoxy.setController(controller)
+
     }
 }
