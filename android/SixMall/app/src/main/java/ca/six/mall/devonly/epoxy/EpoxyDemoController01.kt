@@ -18,5 +18,4 @@ class EpoxyDemoController01 : TypedEpoxyController<List<CharSequence>>() {
 
     }
 
-
 }
