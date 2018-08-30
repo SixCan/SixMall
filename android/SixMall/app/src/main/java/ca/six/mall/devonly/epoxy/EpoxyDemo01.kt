@@ -13,5 +13,7 @@ class EpoxyDemo01 : AppCompatActivity() {
 
         rvEpoxy.layoutManager = LinearLayoutManager(this)
 
+        val controller = EpoxyDemoController01()
+        rvEpoxy.setController(controller)
     }
 }
