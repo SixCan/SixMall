@@ -1,11 +1,13 @@
 package ca.six.mall.biz.home
 
+import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import ca.six.mall.BR
 import ca.six.mall.R
 import ca.six.mall.biz.home.solar.SolarController
+import ca.six.mall.biz.splash.SplashViewModel
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.data.event.LoginEvent
 import ca.six.mall.data.event.LogoutEvent
@@ -33,14 +35,17 @@ class HomeActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
+        val viewModel : HomeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.view = this
+        //TODO
         binding.setLifecycleOwner(this)
-
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = ""
 
         EventBus.getDefault().register(this)
+
+        viewModel.init()
     }
 
     override fun onDestroy() {
