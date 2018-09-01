@@ -10,6 +10,7 @@ public class Temp extends BindingTypesRow{
     public Temp(int layoutResId, int bindingId, Object data) {
         super(layoutResId, bindingId, data);
     }
+
 }
 
 
