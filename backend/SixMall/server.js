@@ -4,11 +4,14 @@ var queryString = require('querystring')
 
 var router = {}
 // 请求静态图片
-var staticRes = require('./static_res') 
+var staticRes = require('./static_res')
 router["res"] = staticRes.requestStaticRes
 
 var splashApi = require('./splash/splash')
 router["/splash"] = splashApi.splash
+var homeApi = require('./splash/home')
+router["/home"] = homeApi.home
+
 var loginApi = require('./auth/login')
 router["/login"] = loginApi.login
 
@@ -31,7 +34,7 @@ function onRequest(req, resp) {
             return
       }
 
-      if (reqUrl.endsWith("jpg")) {
+      if (isResources(reqUrl)) {
             router["res"](reqUrl, resp)
             return
       }
@@ -48,6 +51,18 @@ function dispatch(req, apiName, resp) {
       } else {
             // TODO 有问题就sendError()
       }
+}
+
+function isResources(url) {
+      let resPrefix = ["jpg", "png", "webp", "html", "htm", "css", "js"]
+
+      for (let valided of resPrefix) {
+            if (url.endsWith(valided)) {
+                  return true
+            }
+      }
+      return false
+
 }
 
 /* response : 
