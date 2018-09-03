@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import ca.six.mall.BR
 import ca.six.mall.R
 import ca.six.mall.biz.home.solar.SolarController
-import ca.six.mall.biz.splash.SplashViewModel
 import ca.six.mall.core.BaseActivity
 import ca.six.mall.data.event.LoginEvent
 import ca.six.mall.data.event.LogoutEvent
@@ -25,7 +24,7 @@ import org.greenrobot.eventbus.ThreadMode
 class HomeActivity : BaseActivity() {
     private val SOLAR_IN_RV_POSITION = 0
 
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
     private lateinit var solarController: SolarController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,7 @@ class HomeActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
-        val viewModel : HomeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        val viewModel: HomeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.view = this
         //TODO
         binding.setLifecycleOwner(this)
@@ -58,7 +57,8 @@ class HomeActivity : BaseActivity() {
 
         // solar menus
         solarController = SolarController(this)
-        list.add(BindingTypesRow( R.layout.item_solar_menus, BR.controller, solarController))
+        list.add(BindingTypesRow(R.layout.item_solar_menus, BR.controller, solarController))
+
 
 
         list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
@@ -75,13 +75,13 @@ class HomeActivity : BaseActivity() {
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onEvent(event: LoginEvent){
+    fun onEvent(event: LoginEvent) {
         solarController.isLogin = true
         binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onEvent(event: LogoutEvent){
+    fun onEvent(event: LogoutEvent) {
         solarController.isLogin = false
         binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
