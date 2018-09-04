@@ -6,7 +6,7 @@ import ca.six.mall.core.auth.UserManager
 import ca.six.mall.util.nav
 import ca.six.mall.util.navAuth
 
-class SolarController(val activity : Activity) {
+class SolarController {
     var isLogin = false
 
     fun clickMyAccount(v : View){
@@ -18,7 +18,7 @@ class SolarController(val activity : Activity) {
     }
 
     fun clickMyOrders(v : View){
-        navAuth(activity, "myOrders")
+        navAuth("myOrders")
     }
 
     fun clickCart(v : View){
@@ -26,7 +26,7 @@ class SolarController(val activity : Activity) {
 
     fun clickTrackOrder(v : View){
         // TODO 以后换成"trace my last order"
-        navAuth(activity, "myOrders")
+        navAuth("myOrders")
     }
 
     fun clickFavorites(v : View){
