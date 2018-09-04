@@ -32,11 +32,11 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_home)
 
 
-        binding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
         val viewModel: HomeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.view = this
-        //TODO
+        binding.vm = viewModel
         binding.setLifecycleOwner(this)
 
         setSupportActionBar(toolbar)

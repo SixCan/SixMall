@@ -6,9 +6,13 @@ import android.view.View;
 
 import ca.six.mall.view.rv.one_binding_types.BindingTypesRow;
 
-public class Temp extends BindingTypesRow{
-    public Temp(int layoutResId, int bindingId, Object data) {
-        super(layoutResId, bindingId, data);
+public class Temp {
+    public Temp(int a){
+        this(""+a);
+    }
+
+    public Temp(String a){
+        System.out.println("szw "+a);
     }
 
 }

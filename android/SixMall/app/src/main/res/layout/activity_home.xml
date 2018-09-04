@@ -4,6 +4,7 @@
 
     <data>
         <variable name="view" type="ca.six.mall.biz.home.HomeActivity"/>
+        <variable name="vm" type="ca.six.mall.biz.home.HomeViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -28,7 +29,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_margin="14dp"
-                android:hint="   Search"
+                android:hint="@{vm.keyWordHint}"
                 android:textColorHint="#BDBDBD"
                 android:drawableLeft="@drawable/ic_search_grey"
                 android:textCursorDrawable="@color/colorPrimary"
