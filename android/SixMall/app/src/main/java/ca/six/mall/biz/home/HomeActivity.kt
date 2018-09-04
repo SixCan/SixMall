@@ -60,13 +60,11 @@ class HomeActivity : BaseActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: LoginEvent) {
-//        solarController.isLogin = true //TODO
         binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onEvent(event: LogoutEvent) {
-//        solarController.isLogin = false//TODO
         binding.rvHome.adapter.notifyItemChanged(SOLAR_IN_RV_POSITION)
     }
 

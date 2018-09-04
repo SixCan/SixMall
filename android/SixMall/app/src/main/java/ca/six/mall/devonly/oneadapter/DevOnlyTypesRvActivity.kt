@@ -10,6 +10,7 @@ import ca.six.mall.databinding.ActivityDevOnlyTypesBinding
 import ca.six.mall.devonly.pojo.DevOnlyPerson
 import ca.six.mall.devonly.pojo.DevOnlyUser
 import ca.six.mall.view.rv.one_binding_types.BindingTypesRow
+import ca.six.mall.view.rv.one_binding_types.ID_Model
 
 class DevOnlyTypesRvActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +22,17 @@ class DevOnlyTypesRvActivity : AppCompatActivity() {
         binding.setLifecycleOwner(this)
     }
 
-    fun rows(): List<BindingTypesRow<*>> {
-        val list = ArrayList<BindingTypesRow<*>>()
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("Adam", 2000)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("Eva", 2000)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "xx", false)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "dd", false)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_one, BR.user, DevOnlyUser("test", 1000)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(20, "szw", true)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "xx", false)))
-        list.add(BindingTypesRow(R.layout.item_dev_only_person, BR.person, DevOnlyPerson(10, "dd", false)))
+    fun rows(): List<BindingTypesRow> {
+        val list = ArrayList<BindingTypesRow>()
+        list.add(BindingTypesRow(R.layout.item_dev_only_one, ID_Model(BR.user, DevOnlyUser("Adam", 2000))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_one, ID_Model(BR.user, DevOnlyUser("Eva", 2000))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(20, "szw", true))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(10, "xx", false))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(10, "dd", false))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_one, ID_Model(BR.user, DevOnlyUser("test", 1000))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(20, "szw", true))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(10, "xx", false))))
+        list.add(BindingTypesRow(R.layout.item_dev_only_person, ID_Model(BR.person, DevOnlyPerson(10, "dd", false))))
         return list
     }
 }

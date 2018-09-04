@@ -17,6 +17,7 @@ fun navAuth(from: Activity, path : String){
     }
 }
 
+
 /*
 Why application context works here?
 : because the Router class makes an exception:

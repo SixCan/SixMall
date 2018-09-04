@@ -4,6 +4,7 @@
 
     <data>
         <variable name="controller" type="ca.six.mall.biz.home.solar.SolarController"/>
+        <variable name="auth" type="ca.six.mall.core.auth.UserManager"/>
         <import type="android.view.View"/>
     </data>
 
@@ -109,7 +110,7 @@
             app:layout_constraintCircleAngle="210"
             app:layout_constraintCircleRadius="90dp"
             android:onClick="@{controller.clickLogout}"
-            android:visibility="@{controller.login ? View.VISIBLE : View.GONE}"
+            android:visibility="@{auth.login ? View.VISIBLE : View.GONE}"
             />
 
 

@@ -34,7 +34,7 @@ object DataBindingEx {
     @BindingAdapter( "rows")
     @JvmStatic
     @MainThread
-    fun rvSetRows(rv: RecyclerView, rows :  List<BindingTypesRow<*>>?) {
+    fun rvSetRows(rv: RecyclerView, rows :  List<BindingTypesRow>?) {
         if (rows != null){
             val adapter = OneBindingTypesAdapter(rows)
             rv.adapter = adapter
