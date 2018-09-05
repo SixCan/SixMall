@@ -15,8 +15,8 @@ import com.thejoyrun.router.RouterActivity
 
 @RouterActivity("splash")
 class SplashActivity : BaseActivity() {
-    val ACTION_ID_SPLASH_DONE = 11
-    val DURATION_SPLASH = 2000L
+    private val ACTION_ID_SPLASH_DONE = 11
+    @JvmField val DURATION_SPLASH = 2000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
