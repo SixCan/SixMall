@@ -1,18 +1,15 @@
 package ca.six.mall.biz.splash
 
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.IdlingPolicies
+import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.six.mall.R
-import ca.six.mall.biz.home.HomeActivity
 import ca.six.mall.util.SleepIdler
 import org.junit.Rule
 import org.junit.Test
@@ -28,19 +25,22 @@ class SplashTest {
     var activityRule = ActivityTestRule(SplashActivity::class.java)
 
     @Test
-    fun afterTwoSeconds_displayHomePage() {
+    fun showSpalsh() {
         onView(withId(R.id.ivSplash))
                 .check(matches(isDisplayed()))
+    }
 
+    @Test
+    fun afterTwoSeconds_displayHomePage() {
         val activity = activityRule.activity
         val idle = SleepIdler("splash", activity.DURATION_SPLASH)
         IdlingPolicies.setMasterPolicyTimeout(5, TimeUnit.SECONDS)
         IdlingPolicies.setIdlingResourceTimeout(5, TimeUnit.SECONDS)
-        Espresso.registerIdlingResources(idle)
+        IdlingRegistry.getInstance().register(idle)
 
         onView(withId(R.id.rvHome))
                 .check(matches(isDisplayed()))
 
-        Espresso.unregisterIdlingResources(idle)
+        IdlingRegistry.getInstance().unregister(idle)
     }
 }
