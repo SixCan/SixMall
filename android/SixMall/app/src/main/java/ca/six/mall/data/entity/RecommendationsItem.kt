@@ -5,17 +5,15 @@ import org.json.JSONObject
 import java.util.*
 
 
-class RecommendationsItem(json: JSONObject?) {
+class RecommendationsItem(json: JSONObject) {
     var id: Long = 0
     var pic: String = ""
     var title: String = ""
 
     init {
-        if (json != null) {
-            id = json.optLong("id")
-            pic = json.optString("pic")
-            title = json.optString("title")
-        }
+        id = json.optLong("id")
+        pic = json.optString("pic")
+        title = json.optString("title")
     }
 
 }
