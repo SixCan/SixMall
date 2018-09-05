@@ -1,28 +1,23 @@
-package tool
+// 使用指南，要预告建立好${path}目录和“${path}/item目录”
+//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! test2.json里不能带中文 !!! =============
 
-/**
- * Created by hzsongzhengwang on 2015/6/10.
- */
-
- // 使用指南，要预告建立好${path}目录和“${path}/item目录”
  
 import groovy.json.JsonSlurper
 
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-
-basicFileName = 'SdkPayments'
+//TODO put this as a command argument
+basicFileName = 'Home'
 
 path = "./output/" //要以 "/" 结尾
 responseName = "${basicFileName}Response"
-responseFileName = "${path}${responseName}.java"
+responseFileName = "${path}${responseName}.kt"
 lineSeparator = System.getProperty("line.separator");
 
 def directory = new File(path)
 directory.mkdirs()
-def reader = new FileReader('test2.json')
+def reader = new FileReader('src.json')
 ajson = new JsonSlurper().parse(reader)
 
 
@@ -45,16 +40,16 @@ def write2File(fileFullName, content){
 //key参数是防备有JsonArray<自定义类>的， 这样可以给子Item命名
 def getTypeFromWholePath(key, value){
     if(key.endsWith('id') || key.endsWith('Id')){
-        return 'long'
+        return 'Long'
     }
     valueType = value.getClass()
     switch(valueType){
         case 'class java.lang.String':
             return 'String';
         case 'class java.lang.Boolean':
-            return 'boolean';
+            return 'Boolean';
         case 'class java.lang.Integer':
-            return 'int';
+            return 'Int';
         case 'class java.util.ArrayList':
             listSubClass = value[0].getClass()
             //println "getType() : ArrayList : listSubClass = $listSubClass"
@@ -64,35 +59,31 @@ def getTypeFromWholePath(key, value){
             //println "$key -- ${key.getClass()}"
             objectType = key.capitalize();
             return objectType;
-    //return 'Object'
     }
 }
 
 
-//自定义的类，这里可能会没有import的情况。 这时因为进入类里了才知道要import什么类进来。这个可能要手动加下。
 def parseJson2ResponseFileContent(){
     sb = new StringBuilder()
-    sb<<"package your.company.requests;"<<lineSeparator
-    sb<<lineSeparator
+    sb<<"package your.company.data.entity"<<lineSeparator
+    sb<<lineSeparator  //这一块不用太在意, 粘贴时AndroidStudio会帮你修正package的
 
-    sb<<"import android.text.TextUtils;"<<lineSeparator
     sb<<"import java.util.ArrayList;"<<lineSeparator
     sb<<"import org.json.JSONArray;"<<lineSeparator
-    sb<<"import org.json.JSONException;"<<lineSeparator
     sb<<"import org.json.JSONObject;"<<lineSeparator
     sb<<lineSeparator
 
-    sb<<"public class ${responseName} {"<<lineSeparator
+    sb<<"class ${responseName} (json : JSONObject) {"<<lineSeparator
     ajson.each{key, value ->
         def type = getTypeFromWholePath(key, value)
-        sb<<"\tpublic $type $key;"<<lineSeparator
+        sb<<"\tlateinit var $key :  $type "<<lineSeparator
     }
     sb<<lineSeparator
 
-    sb<<"\tpublic $responseName (String jsonStr){"<<lineSeparator
-    sb<<"\t\tif(!TextUtils.isEmpty(jsonStr)){"<<lineSeparator
-    sb<<"\t\t\ttry{"<<lineSeparator
-    sb<<"\t\t\t\tJSONObject json = new JSONObject(jsonStr);"<<lineSeparator
+    sb<<"\tconstruct(jsonStr : String) : this(JSONObject(jsonStr)) {}"
+    sb<<lineSeparator
+
+    sb<<"\tinit {"<<lineSeparator
     ajson.each{key, value ->
         def type = getTypeFromWholePath(key, value)
 
@@ -104,12 +95,12 @@ def parseJson2ResponseFileContent(){
             }
 
             sb<<lineSeparator
-            sb<<"\t\t\t\tJSONArray array = json.optJSONArray(\"$key\");"<<lineSeparator
+            sb<<"\t\tval array = json.optJSONArray(\"$key\");"<<lineSeparator
 
 
             //println "subtype = $subtype"
-            if(subtype.equals("long") || subtype.equals("int")
-                    || subtype.equals("String") || subtype.equals("boolean")){
+            if(subtype.equals("Long") || subtype.equals("Int")
+                    || subtype.equals("String") || subtype.equals("Boolean")){
                 sb<<"\t\t\t\t$key = new $type();"<<lineSeparator
                 sb<<"\t\t\t\tfor(int i = 0; i < array.length(); i++){"<<lineSeparator
                 sb<<"\t\t\t\t\t$subtype asub = ($subtype) array.opt(i);"<<lineSeparator
@@ -117,21 +108,20 @@ def parseJson2ResponseFileContent(){
                 sb<<"\t\t\t\t}"<<lineSeparator
 
             } else {
-                //TODO
                 writeItemData2File(subtype, value[0])
 
-                sb<<"\t\t\t\t${key} = ${subtype}.createWithJsonArray(array);"<<lineSeparator
-                sb<<"\t\t\t\t"<<lineSeparator
+                sb<<"\t\t${key} = create${subtype}(array)"<<lineSeparator
+                sb<<"\t\t"<<lineSeparator
 
             }
 
         }
 
 
-        else if(type.equals("long") || type.equals("int")
-                || type.equals("String") || type.equals("boolean")){
+        else if(type.equals("Long") || type.equals("Int")
+                || type.equals("String") || type.equals("Boolean")){
             type = type.capitalize()
-            sb<<"\t\t\t\t$key = json.opt${type}(\"$key\");"<<lineSeparator
+            sb<<"\t\t$key = json.opt${type}(\"$key\");"<<lineSeparator
         }
 
 
@@ -141,19 +131,18 @@ def parseJson2ResponseFileContent(){
 
             //add lines to File
             sb<<lineSeparator
-            sb<<"\t\t\t\tJSONObject sub = json.optJSONObject(\"${key}\");"<<lineSeparator
-            sb<<"\t\t\t\t$key = new $type(sub);"<<lineSeparator
+            sb<<"\t\tval sub = json.optJSONObject(\"${key}\");"<<lineSeparator
+            sb<<"\t\t$key = $type(sub);"<<lineSeparator
             sb<<lineSeparator
         }
     }
-    sb<<"\t\t\t} catch (JSONException e) {"<<lineSeparator
-    sb<<"\t\t\t\te.printStackTrace();"<<lineSeparator
-    sb<<"\t\t\t}"<<lineSeparator
-    sb<<"\t\t}"<<lineSeparator
+
     sb<<"\t}"<<lineSeparator
     sb<<lineSeparator
     sb<<"}"<<lineSeparator
 }
+
+
 
 
 def writeItemData2File(fkey, fvalue){
