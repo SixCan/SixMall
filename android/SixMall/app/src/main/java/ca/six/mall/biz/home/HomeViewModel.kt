@@ -14,8 +14,7 @@ import ca.six.mall.view.rv.one_binding_types.ID_Model
 
 class HomeViewModel : ViewModel() {
     val keyWordHint = MutableLiveData<String>()
-    private lateinit var list: ArrayList<BindingTypesRow>
-    var getServerDataEvent = SingleLiveEvent<HomeResponse>()
+    var homeRows : ArrayList<BindingTypesRow> = ArrayList()
 
 
     fun init(){
@@ -25,19 +24,18 @@ class HomeViewModel : ViewModel() {
 
             keyWordHint.postValue(resp.hotkey)
 
-            getServerDataEvent.postValue(resp)
         }
+
+        initHomeRows()
     }
 
-    fun rows(): List<BindingTypesRow> {
-        list = ArrayList()
-
-        // solar menus
+    private fun initHomeRows(){
+        homeRows.clear()
         val solarController = SolarController()
         val solarControllerBinder = ID_Model(BR.controller, solarController)
         val solarLoginBinder = ID_Model(BR.auth, UserManager)
-        list.add(BindingTypesRow(R.layout.item_solar_menus, solarControllerBinder, solarLoginBinder))
+        homeRows.add(BindingTypesRow(R.layout.item_solar_menus, solarControllerBinder, solarLoginBinder))
 
-        return list
     }
+
 }

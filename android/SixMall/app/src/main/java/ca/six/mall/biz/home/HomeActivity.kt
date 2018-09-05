@@ -45,11 +45,6 @@ class HomeActivity : BaseActivity() {
 
         viewModel.init()
 
-        viewModel.getServerDataEvent.observe(this, object : Observer<HomeResponse> {
-            override fun onChanged(t: HomeResponse?) {
-
-            }
-        })
     }
 
     override fun onDestroy() {
