@@ -61,11 +61,14 @@ dependencies {
     implementation 'com.github.joyrun.ActivityRouter:router:0.6.2'
     kapt 'com.github.joyrun.ActivityRouter:router-compiler:0.6.2'
 
+
+    /*
     // Epoxy has an issue when working with databinding.v2
-//    implementation 'com.airbnb.android:epoxy:2.16.2'
-//    kapt "com.airbnb.android:epoxy-processor:2.16.2"
-//    implementation 'com.airbnb.android:epoxy-databinding:2.16.2'
-//    kapt "com.android.databinding:compiler:$android_plugin_version"
+    implementation 'com.airbnb.android:epoxy:2.16.2'
+    kapt "com.airbnb.android:epoxy-processor:2.16.2"
+    implementation 'com.airbnb.android:epoxy-databinding:2.16.2'
+    kapt "com.android.databinding:compiler:$android_plugin_version"
+    */
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
@@ -75,7 +78,7 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:3.3.2'
     testImplementation "org.robolectric:shadows-support-v4:3.3.1"
 
-
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
