@@ -34,8 +34,8 @@ class SplashTest {
     fun afterTwoSeconds_displayHomePage() {
         val activity = activityRule.activity
         val idle = SleepIdler("splash", activity.DURATION_SPLASH)
-        IdlingPolicies.setMasterPolicyTimeout(5, TimeUnit.SECONDS)
-        IdlingPolicies.setIdlingResourceTimeout(5, TimeUnit.SECONDS)
+        IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS)
+        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS)
         IdlingRegistry.getInstance().register(idle)
 
         onView(withId(R.id.rvHome))
