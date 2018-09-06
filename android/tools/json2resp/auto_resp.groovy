@@ -8,12 +8,12 @@ package tool
  
 import groovy.json.JsonSlurper
 
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
 
-basicFileName = 'SdkPayments'
+basicFileName = 'My'
 
 path = "./output/" //要以 "/" 结尾
 responseName = "${basicFileName}Response"
@@ -22,7 +22,7 @@ lineSeparator = System.getProperty("line.separator");
 
 def directory = new File(path)
 directory.mkdirs()
-def reader = new FileReader('test2.json')
+def reader = new FileReader('src.json')
 ajson = new JsonSlurper().parse(reader)
 
 
@@ -48,6 +48,7 @@ def getTypeFromWholePath(key, value){
         return 'long'
     }
     valueType = value.getClass()
+    println "getTypes() : $valueType"
     switch(valueType){
         case 'class java.lang.String':
             return 'String';
@@ -64,7 +65,8 @@ def getTypeFromWholePath(key, value){
             //println "$key -- ${key.getClass()}"
             objectType = key.capitalize();
             return objectType;
-    //return 'Object'
+        case 'class org.codehaus.groovy.runtime.NullObject':
+            return "null"
     }
 }
 
@@ -95,8 +97,12 @@ def parseJson2ResponseFileContent(){
     sb<<"\t\t\t\tJSONObject json = new JSONObject(jsonStr);"<<lineSeparator
     ajson.each{key, value ->
         def type = getTypeFromWholePath(key, value)
+        println "parse() type = $type"
 
-        if (type.startsWith("ArrayList")){
+        if("null".equals(type)){
+            return
+        }
+        else if (type.startsWith("ArrayList")){
             def subtype = ""
             def pattern = ~/ArrayList<(.*)>/
             type.find(pattern){
@@ -220,3 +226,26 @@ def writeItemData2File(fkey, fvalue){
 
     write2File("${path}${fkey.capitalize()}.java", sb2)
 }
+
+/*
+已知bug
+
+1. 生成的基本类型array是: 
+	public ArrayList<int> next;
+
+2. 有2个JsonArray时就都被命名为ary了
+
+3. arraylist格式不对
+			next = new ArrayList<>();
+			for (int i = 0 ; i < size ; i++) {
+				next.add(ary.optInt(i));
+				}
+
+4. JsonArray中再带JsonArray, 取值不对
+			subs = new ArrayList<>();
+			for (int i = 0 ; i < size ; i++) {
+				subs.add(ary.optSubsItem(i));
+				}
+
+
+*/

@@ -1,30 +1,57 @@
 {
-    "hotkey": "kitty",
-    "recommendations": [
-      {
-        "id": "33880013",
-        "pic": "http://192.168.2.26:8899/images/items/cat3.webp",
-        "title": "Kitty Adoption"
+  "array2": [
+    1,
+    2,
+    3
+  ],
+  "boolean2": true,
+  "color2": "#82b92c",
+  "null2": null,
+  "number2": 123,
+  "object2": {
+    "a": "b",
+    "c": "d",
+    "e": "f"
+  },
+  "string2": "Hello World",
+  "recommends": [
+    {
+      "id": "33880013",
+      "pic": "http://192.168.2.26:8899/images/items/cat3.webp",
+      "id_model": {
+        "id": 20,
+        "model": "A"
       },
-      {
-        "id": "33880014",
-        "pic": "http://192.168.2.26:8899/images/items/cat4.webp",
-        "title": "Kitty Adoption"
+      "subs": [
+        {
+          "name": "a",
+          "attr": "none"
+        }
+      ],
+      "next": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "33880014",
+      "pic": "http://192.168.2.26:8899/images/items/cat4.webp",
+      "id_model": {
+        "id": 20,
+        "model": "A"
       },
-      {
-        "id": "338203303",
-        "pic": "http://192.168.2.26:8899/images/items/iphoneX2.png",
-        "title": "iPhone X"
-      },
-      {
-        "id": "33880019",
-        "pic": "http://192.168.2.26:8899/images/items/cat9.webp",
-        "title": "Kitty Adoption"
-      },
-      {
-        "id": "338203301",
-        "pic": "http://192.168.2.26:8899/images/items/iphone6.webp",
-        "title": "iPhone6"
-      }
-    ]
-  }
+      "subs": [
+        {
+          "name": "a",
+          "attr": "none"
+        }
+      ],
+      "next": [
+        8,
+        9,
+        10
+      ]
+    }
+  ]
+}
