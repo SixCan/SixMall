@@ -1,8 +1,8 @@
 // 使用指南，要预告建立好${path}目录和“${path}/item目录”
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
-//========== !!! test2.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
+//========== !!! src.json里不能带中文 !!! =============
 
  
 import groovy.json.JsonSlurper
@@ -76,6 +76,7 @@ def parseJson2ResponseFileContent(){
     sb<<"class ${responseName} (json : JSONObject) {"<<lineSeparator
     ajson.each{key, value ->
         def type = getTypeFromWholePath(key, value)
+        //TODO kotlin中lateinit不能用于基本类型, 这里怕是要改
         sb<<"\tlateinit var $key :  $type "<<lineSeparator
     }
     sb<<lineSeparator
@@ -95,17 +96,17 @@ def parseJson2ResponseFileContent(){
             }
 
             sb<<lineSeparator
-            sb<<"\t\tval array = json.optJSONArray(\"$key\");"<<lineSeparator
+            sb<<"\t\tval array = json.optJSONArray(\"$key\")"<<lineSeparator
 
 
             //println "subtype = $subtype"
             if(subtype.equals("Long") || subtype.equals("Int")
                     || subtype.equals("String") || subtype.equals("Boolean")){
-                sb<<"\t\t\t\t$key = new $type();"<<lineSeparator
-                sb<<"\t\t\t\tfor(int i = 0; i < array.length(); i++){"<<lineSeparator
-                sb<<"\t\t\t\t\t$subtype asub = ($subtype) array.opt(i);"<<lineSeparator
-                sb<<"\t\t\t\t\t${key}.add(asub);"<<lineSeparator
-                sb<<"\t\t\t\t}"<<lineSeparator
+                sb<<"\t\t$key = new $type();"<<lineSeparator
+                sb<<"\t\tfor(i in 0 until array.length){"<<lineSeparator
+                sb<<"\t\t\tval asub = array.opt(i) as $subtype"<<lineSeparator
+                sb<<"\t\t\t${key}.add(asub)"<<lineSeparator
+                sb<<"\t\t}"<<lineSeparator
 
             } else {
                 writeItemData2File(subtype, value[0])
@@ -121,7 +122,7 @@ def parseJson2ResponseFileContent(){
         else if(type.equals("Long") || type.equals("Int")
                 || type.equals("String") || type.equals("Boolean")){
             type = type.capitalize()
-            sb<<"\t\t$key = json.opt${type}(\"$key\");"<<lineSeparator
+            sb<<"\t\t$key = json.opt${type}(\"$key\")"<<lineSeparator
         }
 
 
@@ -131,8 +132,8 @@ def parseJson2ResponseFileContent(){
 
             //add lines to File
             sb<<lineSeparator
-            sb<<"\t\tval sub = json.optJSONObject(\"${key}\");"<<lineSeparator
-            sb<<"\t\t$key = $type(sub);"<<lineSeparator
+            sb<<"\t\tval sub = json.optJSONObject(\"${key}\")"<<lineSeparator
+            sb<<"\t\t$key = $type(sub)"<<lineSeparator
             sb<<lineSeparator
         }
     }
@@ -147,23 +148,23 @@ def parseJson2ResponseFileContent(){
 
 def writeItemData2File(fkey, fvalue){
     def sb2 = new StringBuilder()
-    sb2<<"package your.company.model;"<<lineSeparator
+    sb2<<"package your.company.data.entity"<<lineSeparator
     sb2<<lineSeparator
 
-    sb2<<"import java.util.ArrayList;"<<lineSeparator
-    sb2<<"import org.json.JSONArray;"<<lineSeparator
-    sb2<<"import org.json.JSONException;"<<lineSeparator
-    sb2<<"import org.json.JSONObject;"<<lineSeparator
+    sb2<<"import java.util.ArrayList"<<lineSeparator
+    sb2<<"import org.json.JSONArray"<<lineSeparator
+    sb2<<"import org.json.JSONObject"<<lineSeparator
     sb2<<lineSeparator
 
-    sb2<<"public class ${fkey.capitalize()} {"<<lineSeparator
+    sb2<<"class ${fkey.capitalize()}(json : JSONObject?) {"<<lineSeparator
     fvalue.each{key, value ->
         def type = getTypeFromWholePath(key, value)
-        sb2<<"\tpublic $type $key;"<<lineSeparator
+        //TODO kotlin中lateinit不能用于基本类型, 这里怕是要改
+        sb2<<"\tlateinit var $key : $type"<<lineSeparator
     }
     sb2<<lineSeparator
 
-    sb2<<"\tpublic ${fkey.capitalize()} (JSONObject json){"<<lineSeparator
+    sb2<<"\tpublic ${fkey.capitalize()} {"<<lineSeparator
     sb2<<"\t\tif(json != null){"<<lineSeparator
     fvalue.each{key, value ->
         def type = getTypeFromWholePath(key, value)
