@@ -2,7 +2,7 @@ package ca.six.mall.core.auth
 
 import ca.six.mall.data.event.LoginEvent
 import ca.six.mall.data.event.LogoutEvent
-import ca.six.tomato.util.showToast
+import ca.six.mall.util.showToast
 import org.greenrobot.eventbus.EventBus
 
 object UserManager {

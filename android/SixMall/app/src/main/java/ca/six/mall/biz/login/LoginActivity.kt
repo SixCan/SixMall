@@ -6,11 +6,10 @@ import android.os.Bundle
 import android.view.View
 import ca.six.mall.R
 import ca.six.mall.core.BaseActivity
-import ca.six.mall.core.auth.UserManager
 import ca.six.mall.databinding.ActivityLoginBinding
 import ca.six.mall.util.dp2px
-import ca.six.tomato.util.getCircleBitmap
-import ca.six.tomato.util.getVectorBitmap
+import ca.six.mall.util.getCircleBitmap
+import ca.six.mall.util.getVectorBitmap
 import com.thejoyrun.router.Router
 import com.thejoyrun.router.RouterActivity
 

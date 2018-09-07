@@ -1,9 +1,7 @@
-package ca.six.tomato.util
+package ca.six.mall.util
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.*
-import android.graphics.drawable.VectorDrawable
 import android.support.annotation.ColorInt
 import android.widget.Toast
 import ca.six.mall.core.BaseApp
@@ -13,22 +11,22 @@ fun showToast(text: String) {
     Toast.makeText(BaseApp.appContext, text, Toast.LENGTH_SHORT).show()
 }
 
-fun getVectorBitmap(ctx : Context, iconRes : Int, width : Int = 0, height : Int = 0) : Bitmap{
+fun getVectorBitmap(ctx: Context, iconRes: Int, width: Int = 0, height: Int = 0): Bitmap {
     // vector pictures
     val drawable = ctx.getDrawable(iconRes) //=> 若是vector, 则drawable的类型是android.graphics.drawable.VectorDrawable
 
     var w = width
     var h = height
-    if(w == 0) {
+    if (w == 0) {
         w = drawable.intrinsicWidth
     }
-    if(h == 0){
+    if (h == 0) {
         h = drawable.intrinsicHeight
     }
 
     val bitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
-    drawable.setBounds(0, 0 , canvas.width, canvas.height)
+    drawable.setBounds(0, 0, canvas.width, canvas.height)
     drawable.draw(canvas)
     return bitmap
 }
@@ -53,9 +51,9 @@ fun getCircleBitmap(src: Bitmap, radius: Float): Bitmap {
 }
 
 @ColorInt
-fun randomColor() : Int {
+fun randomColor(): Int {
     val rand = Random()
-    return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256) )
+    return Color.argb(255, rand.nextInt(256), rand.nextInt(256), rand.nextInt(256))
 
 }
 

@@ -1,7 +1,6 @@
 package ca.six.mall.view.solar
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
@@ -13,9 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import ca.six.mall.R
 import ca.six.mall.util.px2dp
-import ca.six.tomato.util.getCircleBitmap
-import ca.six.tomato.util.getVectorBitmap
-import ca.six.tomato.util.randomColor
 
 /*
 [使用建议]

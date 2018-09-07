@@ -2,7 +2,7 @@ package ca.six.mall.core.http
 
 import android.support.annotation.WorkerThread
 import ca.six.mall.core.BaseApp
-import ca.six.tomato.util.showToast
+import ca.six.mall.util.showToast
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException

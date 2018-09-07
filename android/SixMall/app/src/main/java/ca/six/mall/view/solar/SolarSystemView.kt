@@ -12,7 +12,7 @@ import android.support.constraint.ConstraintSet.PARENT_ID
 import android.util.AttributeSet
 import android.view.View
 import ca.six.mall.util.dp2px
-import ca.six.tomato.util.randomColor
+import ca.six.mall.util.randomColor
 
 /*
 addMenu(icon, text, clickListener);
