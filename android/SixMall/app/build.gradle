@@ -2,6 +2,11 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin:'jacoco'
+
+jacoco{
+    toolVersion "0.7.4.201502262128"
+}
 
 android {
     compileSdkVersion 27
@@ -11,12 +16,16 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "ca.six.mall.util.JUnitJacocoTestRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        //需要在这里也添加，否则计算出来的覆盖率为0
+        debug{
+            testCoverageEnabled true
         }
     }
 
@@ -93,4 +102,39 @@ kapt {
 
     // Airbnb/Epoxy. So the `AutoModel` annotation work properly.
     correctErrorTypes = true
+}
+
+
+task jacocoTestReport(type:JacocoReport,dependsOn:"connectedAndroidTest"){
+    group="Reporting"
+    description = "Generate Jacoco coverage reports"
+
+    //exclude auto-generated classes and tests
+    def fileFilter=['**/R.class',
+                    '**/R$*.class',
+                    '**/Manifest*.*',
+                    '**/BuildConfig.*',
+                    'android/**/*.*',
+    ]
+    def debugTree=fileTree(dir:
+            "${rootDir}/sdk/build/intermediates/classes/debug",
+            excludes: fileFilter)
+    def sdkSrc="${rootDir}/sdk/src/main/java"
+
+    //指明对哪个目录下的代码进行绘制覆盖率统计图标
+    sourceDirectories=files([sdkSrc])
+    //指明对哪个目录下的代码进行覆盖率统计
+    classDirectories=files([debugTree])
+    additionalSourceDirs=files([
+            "${buildDir}/generated/source/buildConfig/debug",
+            "${buildDir}/generated/source/r/debug"
+    ])
+    executionData=fileTree(dir:project.projectDir,includes:['**/*.exec','**/*.ec'])
+    reports{
+        xml.enabled=true
+        xml.destination="${buildDir}/jacocoTestReport.xml"
+        csv.enabled=false
+        html.enabled=true
+        html.destination="${buildDir}/reports/jacoco"
+    }
 }
