@@ -228,7 +228,7 @@ def writeItemData2File(fkey, fvalue){
 }
 
 /*
-已知bug
+已知bug (auto_resp_in_kotlin.groovy里已经全部修复了这些bug)
 
 1. 生成的基本类型array是: 
 	public ArrayList<int> next;

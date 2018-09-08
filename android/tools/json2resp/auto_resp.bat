@@ -1,2 +1,2 @@
-groovy auto_resp in_kotlin.groovy
+groovy auto_resp_in_kotlin.groovy
 pause

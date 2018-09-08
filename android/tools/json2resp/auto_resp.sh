@@ -1,4 +1,4 @@
-groovy auto_resp in_kotlin.groovy
+groovy auto_resp_in_kotlin.groovy
 pause
 
 # 要运行, 可能先要chmod +x, 之后才能运行
