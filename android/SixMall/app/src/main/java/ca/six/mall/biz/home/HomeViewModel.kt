@@ -25,6 +25,11 @@ class HomeViewModel : ViewModel() {
             keyWordHint.postValue(resp.hotkey)
 
             initHomeRows()
+
+            if (resp.recommendations.size > 0) {
+                val id_model = ID_Model(BR.title, "Recommendations")
+                homeRows.add(BindingTypesRow(R.layout.item_title_text_medium, id_model))
+            }
             resp.recommendations.forEach { item ->
                 val id_model = ID_Model(BR.model, item)
                 homeRows.add(BindingTypesRow(R.layout.item_home_recommend, id_model))

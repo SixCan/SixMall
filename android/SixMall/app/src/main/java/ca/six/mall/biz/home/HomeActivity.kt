@@ -1,15 +1,11 @@
 package ca.six.mall.biz.home
 
-import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import ca.six.mall.BR
 import ca.six.mall.R
-import ca.six.mall.biz.home.solar.SolarController
 import ca.six.mall.core.BaseActivity
-import ca.six.mall.data.entity.HomeResponse
 import ca.six.mall.data.event.LoginEvent
 import ca.six.mall.data.event.LogoutEvent
 import ca.six.mall.databinding.ActivityHomeBinding
@@ -29,7 +25,6 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
