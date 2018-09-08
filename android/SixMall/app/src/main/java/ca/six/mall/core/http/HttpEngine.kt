@@ -11,9 +11,10 @@ import java.io.IOException
 object HttpEngine {
     val CODE_SUCCESS = 200
 
-    // for dev-only
+    // for t androidTest
     var isMock = false
     var mockJson = ""
+    var isFinished = false;
 
     // config info
     val PREFIX = "http://192.168.2.26:8899/"  // Node.js runs on my Mac
@@ -30,6 +31,7 @@ object HttpEngine {
                 formData : RequestBody? = null,
                 @WorkerThread onResp: (payload: JSONObject) -> Unit
                 ) {
+        isFinished = false
         val requestBuilder = Request.Builder()
                 .url(PREFIX + apiName)
 
@@ -42,9 +44,11 @@ object HttpEngine {
         http.newCall(req).enqueue(object : Callback {
             override fun onFailure(call: Call?, e: IOException?) {
                 println("szw err = $e") //TODO 后续可以统一处理请求过程中的failure
+                isFinished = true
             }
 
             override fun onResponse(call: Call, resp: Response) {
+                println("szw path003")
                 val respStr = resp.body()?.string() ?: "" // 三目运算符
                 val respJson = JSONObject(respStr)
 
@@ -61,6 +65,7 @@ object HttpEngine {
                     }
 
                 }
+                isFinished = true
             }
 
         })
