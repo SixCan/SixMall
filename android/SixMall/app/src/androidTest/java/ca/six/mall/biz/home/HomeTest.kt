@@ -1,24 +1,20 @@
 package ca.six.mall.biz.home
 
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.IdlingPolicies
+import android.support.test.espresso.IdlingRegistry
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers.withHint
+import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.filters.LargeTest
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import ca.six.mall.core.http.HttpEngine
-import org.junit.After
-import org.junit.Rule
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import android.support.test.espresso.Espresso.onView
-import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.*
 import ca.six.mall.R
-import org.junit.Before
-import android.support.test.espresso.Espresso
-import android.support.test.espresso.IdlingPolicies
-import android.support.test.espresso.IdlingRegistry
 import ca.six.mall.core.AsyncIdlingRes
 import ca.six.mall.core.IIdlingFlag
+import ca.six.mall.core.http.HttpEngine
+import org.junit.*
+import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
 
@@ -35,22 +31,21 @@ class HomeTest : IIdlingFlag {
         return HttpEngine.isFinished
     }
 
-    @Test
-    fun init_showSolarMenu() {
-        initEnv()
-        onView(withId(R.id.menuMyAccount))
-                .check(matches(isDisplayed()))
-    }
+//    @Test
+//    fun init_showSolarMenu() {
+//        initEnv()
+//        onView(withId(R.id.menuMyAccount))
+//                .check(matches(isDisplayed()))
+//    }
 
     @Test
-    fun init_getHintFromServer(){
+    fun init_getHintFromServer() {
         IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS);
         IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
 
         val idlingResource = AsyncIdlingRes(this);
         IdlingRegistry.getInstance().register(idlingResource)
 
-        initEnv()
         onView(withId(R.id.etSearch))
                 .check(matches(withHint("iphone")))
 
@@ -59,10 +54,15 @@ class HomeTest : IIdlingFlag {
 
     }
 
-    @Before
-    fun initEnv(){
-        HttpEngine.isMock = true
-        HttpEngine.mockJson = """
+    companion object {
+        @BeforeClass
+        @JvmStatic
+        fun a() {
+            println("szw path beforeClass")
+
+            HttpEngine.isMock = true
+            println("szw Test @Before : ${HttpEngine.isMock}")
+            HttpEngine.mockJson = """
 {
   "hotkey": "iphone",
   "recommendations": [
@@ -79,13 +79,14 @@ class HomeTest : IIdlingFlag {
   ]
 }
         """.trimIndent()
-    }
+        }
 
 
+        @AfterClass @JvmStatic
+        fun reset() {
+            HttpEngine.isMock = false
+            println("szw Test @After : ${HttpEngine.isMock}")
+        }
 
-    @After
-    fun reset() {
-        HttpEngine.isMock = false
-    }
-
+    } // end of companion object
 }
