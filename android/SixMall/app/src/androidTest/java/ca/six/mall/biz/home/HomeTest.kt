@@ -13,31 +13,21 @@ import ca.six.mall.R
 import ca.six.mall.core.AsyncIdlingRes
 import ca.six.mall.core.IIdlingFlag
 import ca.six.mall.core.http.HttpEngine
-import org.junit.*
+import org.junit.AfterClass
+import org.junit.BeforeClass
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
-import java.lang.reflect.Array.setInt
-import java.lang.reflect.AccessibleObject.setAccessible
-import java.lang.reflect.Field
-import java.lang.reflect.Modifier
-import android.databinding.ViewDataBinding
-
-
 
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class HomeTest : IIdlingFlag {
 
-    @Rule @JvmField    //@get:Rule
-    var activityRule = object: ActivityTestRule<HomeActivity>(HomeActivity::class.java) {
-        override protected fun beforeActivityLaunched() {
-            super.beforeActivityLaunched()
-            //Because we are using data-binding, we avoid using CHOREOGRAPHER
-            setFinalStatic(ViewDataBinding::class.java.getDeclaredField("USE_CHOREOGRAPHER"), false)
-
-        }
-    }
+    @Rule
+    @JvmField    //@get:Rule
+    var activityRule = ActivityTestRule<HomeActivity>(HomeActivity::class.java)
 
     override fun isFinish(): Boolean {
         println("szw Test isFinish() : ${HttpEngine.isFinished}")
@@ -101,29 +91,13 @@ class HomeTest : IIdlingFlag {
         }
 
 
-        @AfterClass @JvmStatic
+        @AfterClass
+        @JvmStatic
         fun reset() {
             HttpEngine.isMock = false
             println("szw Test @AfterClass : ${HttpEngine.isMock}")
         }
 
     } // end of companion object
-
-    fun setFinalStatic(field: Field, newValue: Any) {
-        field.setAccessible(true)
-
-        var modifiersField: Field
-        try {
-            modifiersField = Field::class.java!!.getDeclaredField("accessFlags")
-        } catch (e: NoSuchFieldException) {
-            //This is an emulator JVM  ¯\_(ツ)_/¯
-            modifiersField = Field::class.java!!.getDeclaredField("modifiers")
-        }
-
-        modifiersField.setAccessible(true)
-        modifiersField.setInt(field, field.getModifiers() and Modifier.FINAL.inv())
-
-        field.set(null, newValue)
-    }
 }
 
