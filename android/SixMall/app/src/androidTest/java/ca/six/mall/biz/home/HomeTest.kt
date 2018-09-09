@@ -16,6 +16,13 @@ import ca.six.mall.core.http.HttpEngine
 import org.junit.*
 import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
+import java.lang.reflect.Array.setInt
+import java.lang.reflect.AccessibleObject.setAccessible
+import java.lang.reflect.Field
+import java.lang.reflect.Modifier
+import android.databinding.ViewDataBinding
+
+
 
 
 @RunWith(AndroidJUnit4::class)
@@ -23,7 +30,14 @@ import java.util.concurrent.TimeUnit
 class HomeTest : IIdlingFlag {
 
     @Rule @JvmField    //@get:Rule
-    var activityRule = ActivityTestRule(HomeActivity::class.java)
+    var activityRule = object: ActivityTestRule<HomeActivity>(HomeActivity::class.java) {
+        override protected fun beforeActivityLaunched() {
+            super.beforeActivityLaunched()
+            //Because we are using data-binding, we avoid using CHOREOGRAPHER
+            setFinalStatic(ViewDataBinding::class.java.getDeclaredField("USE_CHOREOGRAPHER"), false)
+
+        }
+    }
 
     override fun isFinish(): Boolean {
         println("szw Test isFinish() : ${HttpEngine.isFinished}")
@@ -60,7 +74,7 @@ class HomeTest : IIdlingFlag {
     companion object {
         @BeforeClass
         @JvmStatic
-        fun a() {
+        fun initEnv() {
             HttpEngine.isMock = true
             println("szw Test @BeforeClass : ${HttpEngine.isMock}")
             HttpEngine.mockJson = """
@@ -94,4 +108,22 @@ class HomeTest : IIdlingFlag {
         }
 
     } // end of companion object
+
+    fun setFinalStatic(field: Field, newValue: Any) {
+        field.setAccessible(true)
+
+        var modifiersField: Field
+        try {
+            modifiersField = Field::class.java!!.getDeclaredField("accessFlags")
+        } catch (e: NoSuchFieldException) {
+            //This is an emulator JVM  ¯\_(ツ)_/¯
+            modifiersField = Field::class.java!!.getDeclaredField("modifiers")
+        }
+
+        modifiersField.setAccessible(true)
+        modifiersField.setInt(field, field.getModifiers() and Modifier.FINAL.inv())
+
+        field.set(null, newValue)
+    }
 }
+
