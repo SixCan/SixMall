@@ -5,7 +5,6 @@ class MockResponseInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         if (HttpEngine.isMock) {
-            println("szw path001")
             val jsonContent = HttpEngine.mockJson
             val responseBody = ResponseBody.create(MediaType.parse("application/x-www-form-urlencoded"), jsonContent)
 
@@ -13,12 +12,11 @@ class MockResponseInterceptor : Interceptor {
             return Response.Builder()
                     .request(request)
                     .protocol(Protocol.HTTP_1_1)
-                    .code(200)
+                    .code(HttpEngine.CODE_SUCCESS)
                     .message("ok")
                     .body(responseBody)
                     .build()
         } else {
-            println("szw path002")
             return chain.proceed(request)
         }
     }

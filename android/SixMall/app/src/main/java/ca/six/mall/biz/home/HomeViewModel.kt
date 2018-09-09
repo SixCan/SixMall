@@ -17,6 +17,7 @@ class HomeViewModel : ViewModel() {
 
 
     fun init() {
+        println("szw vm init() 01")
         HttpEngine.request("home") { payload ->
             // worker thread
             println("szw home = $payload")
@@ -24,8 +25,10 @@ class HomeViewModel : ViewModel() {
 
             keyWordHint.postValue(resp.hotkey)
 
+            println("szw vm init() callback 02")
             initHomeRows()
 
+            println("szw vm init() callback 03")
             if (resp.recommendations.size > 0) {
                 val id_model = ID_Model(BR.title, "Recommendations")
                 homeRows.add(BindingTypesRow(R.layout.item_title_text_medium, id_model))
@@ -34,10 +37,12 @@ class HomeViewModel : ViewModel() {
                 val id_model = ID_Model(BR.model, item)
                 homeRows.add(BindingTypesRow(R.layout.item_home_recommend, id_model))
             }
+            println("szw vm init() callback 03")
 
         }
 
         initHomeRows()
+        println("szw vm init() 04")
     }
 
     private fun initHomeRows() {

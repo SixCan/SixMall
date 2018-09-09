@@ -20,6 +20,7 @@ class HomeActivity : BaseActivity() {
     private val SOLAR_IN_RV_POSITION = 0
 
     private lateinit var binding: ActivityHomeBinding
+    lateinit var viewModel : HomeViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,7 @@ class HomeActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         binding.rvHome.layoutManager = LinearLayoutManager(this)
-        val viewModel: HomeViewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         binding.view = this
         binding.vm = viewModel
         binding.setLifecycleOwner(this)

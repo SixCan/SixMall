@@ -21,9 +21,8 @@ import java.util.concurrent.TimeUnit
 @RunWith(AndroidJUnit4::class)
 @LargeTest
 class HomeTest : IIdlingFlag {
-    //    @get:Rule
-    @Rule
-    @JvmField
+
+    @Rule @JvmField    //@get:Rule
     var activityRule = ActivityTestRule(HomeActivity::class.java)
 
     override fun isFinish(): Boolean {
@@ -40,43 +39,49 @@ class HomeTest : IIdlingFlag {
 
     @Test
     fun init_getHintFromServer() {
+        println("szw test 01")
         IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS);
         IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
 
         val idlingResource = AsyncIdlingRes(this);
         IdlingRegistry.getInstance().register(idlingResource)
 
+        println("szw test 02")
         onView(withId(R.id.etSearch))
                 .check(matches(withHint("iphone")))
+        val hint = activityRule.activity.viewModel.keyWordHint
+        println("szw test 03 ${hint.value}")
 
         idlingResource.removeListener(); // for memory leak
         IdlingRegistry.getInstance().unregister(idlingResource)
-
+        println("szw test 04")
     }
 
     companion object {
         @BeforeClass
         @JvmStatic
         fun a() {
-            println("szw path beforeClass")
-
             HttpEngine.isMock = true
-            println("szw Test @Before : ${HttpEngine.isMock}")
+            println("szw Test @BeforeClass : ${HttpEngine.isMock}")
             HttpEngine.mockJson = """
 {
-  "hotkey": "iphone",
-  "recommendations": [
-    {
-      "id": "33880013",
-      "pic": "http://192.168.2.26:8899/images/items/cat3.webp",
-      "title": "Kitty Adoption"
-    },
-    {
-      "id": "33880014",
-      "pic": "http://192.168.2.26:8899/images/items/cat4.webp",
-      "title": "Kitty Adoption"
-    }
-  ]
+  "code": 200,
+  "msg": "",
+  "payload": {
+    "hotkey": "kitty",
+    "recommendations": [
+      {
+        "id": "33880013",
+        "pic": "http://192.168.2.26:8899/images/items/cat3.webp",
+        "title": "Kitty Adoption"
+      },
+      {
+        "id": "33880014",
+        "pic": "http://192.168.2.26:8899/images/items/cat4.webp",
+        "title": "Kitty Adoption"
+      }
+    ]
+  }
 }
         """.trimIndent()
         }
@@ -85,7 +90,7 @@ class HomeTest : IIdlingFlag {
         @AfterClass @JvmStatic
         fun reset() {
             HttpEngine.isMock = false
-            println("szw Test @After : ${HttpEngine.isMock}")
+            println("szw Test @AfterClass : ${HttpEngine.isMock}")
         }
 
     } // end of companion object
