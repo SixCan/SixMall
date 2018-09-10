@@ -43,14 +43,16 @@ class HomeTest : IIdlingFlag {
 
     @Test
     fun init_getHintFromServer() {
-        println("szw test 01")
         IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS);
         IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
 
         val idlingResource = AsyncIdlingRes(this);
         IdlingRegistry.getInstance().register(idlingResource)
 
+        println("szw test 01")
+        Thread.sleep(3000)
         println("szw test 02")
+
         onView(withId(R.id.etSearch))
                 .check(matches(withHint("iphone")))
         val hint = activityRule.activity.viewModel.keyWordHint
@@ -72,7 +74,7 @@ class HomeTest : IIdlingFlag {
   "code": 200,
   "msg": "",
   "payload": {
-    "hotkey": "kitty",
+    "hotkey": "iphone",
     "recommendations": [
       {
         "id": "33880013",
