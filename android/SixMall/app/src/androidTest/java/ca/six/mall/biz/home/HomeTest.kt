@@ -13,6 +13,7 @@ import ca.six.mall.R
 import ca.six.mall.core.AsyncIdlingRes
 import ca.six.mall.core.IIdlingFlag
 import ca.six.mall.core.http.HttpEngine
+import ca.six.mall.util.SleepIdler
 import org.junit.AfterClass
 import org.junit.BeforeClass
 import org.junit.Rule
@@ -23,16 +24,11 @@ import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class HomeTest : IIdlingFlag {
+class HomeTest {
 
     @Rule
     @JvmField    //@get:Rule
     var activityRule = ActivityTestRule<HomeActivity>(HomeActivity::class.java)
-
-    override fun isFinish(): Boolean {
-        println("szw Test isFinish() : ${HttpEngine.isFinished}")
-        return HttpEngine.isFinished
-    }
 
 //    @Test
 //    fun init_showSolarMenu() {
@@ -43,24 +39,17 @@ class HomeTest : IIdlingFlag {
 
     @Test
     fun init_getHintFromServer() {
-        IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS);
-        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS);
-
-        val idlingResource = AsyncIdlingRes(this);
-        IdlingRegistry.getInstance().register(idlingResource)
-
-        println("szw test 01")
-        Thread.sleep(3000)
-        println("szw test 02")
+        val activity = activityRule.activity
+        val idle = SleepIdler("HomeHint", 3000)
+        IdlingPolicies.setMasterPolicyTimeout(6, TimeUnit.SECONDS)
+        IdlingPolicies.setIdlingResourceTimeout(10, TimeUnit.SECONDS)
+        IdlingRegistry.getInstance().register(idle)
 
         onView(withId(R.id.etSearch))
                 .check(matches(withHint("iphone")))
         val hint = activityRule.activity.viewModel.keyWordHint
-        println("szw test 03 ${hint.value}")
 
-        idlingResource.removeListener(); // for memory leak
-        IdlingRegistry.getInstance().unregister(idlingResource)
-        println("szw test 04")
+        IdlingRegistry.getInstance().unregister(idle)
     }
 
     companion object {
