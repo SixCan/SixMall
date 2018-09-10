@@ -1,7 +1,7 @@
 package ca.six.mall.core
 
-import android.support.test.espresso.IdlingResource.ResourceCallback
 import android.support.test.espresso.IdlingResource
+import android.support.test.espresso.IdlingResource.ResourceCallback
 
 
 /**

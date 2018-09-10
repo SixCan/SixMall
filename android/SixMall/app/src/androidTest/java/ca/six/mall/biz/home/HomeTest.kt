@@ -8,12 +8,11 @@ import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import ca.six.mall.R
 import ca.six.mall.core.http.HttpEngine
-import org.junit.*
+import org.junit.AfterClass
+import org.junit.BeforeClass
+import org.junit.Rule
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.mock
-
-data class Apple(val name: String){}
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -22,12 +21,6 @@ class HomeTest {
     @Rule
     @JvmField    //@get:Rule
     var activityRule = ActivityTestRule<HomeActivity>(HomeActivity::class.java)
-
-    @Before
-    fun setUp() {
-        val apple = mock(Apple::class.java)
-        `when`(apple.name).thenReturn("ios")
-    }
 
     @Test
     fun init_showSolarMenu() {
