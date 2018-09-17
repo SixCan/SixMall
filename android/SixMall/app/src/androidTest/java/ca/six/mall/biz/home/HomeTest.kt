@@ -47,7 +47,7 @@ class HomeTest {
 
         val rvItem1 = RecyclerViewMatcher(R.id.rvHome).atPosition(recommendationPosition)
         onView(rvItem1)
-                .check(matches(hasDescendant(withText("Cat"))))
+                .check(matches(hasDescendant(withText("Cat Adoption"))))
     }
 
 
