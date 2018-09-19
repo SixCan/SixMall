@@ -1,6 +1,5 @@
 var http = require('http')
 var url = require('url')
-var queryString = require('querystring')
 
 var router = {}
 // 请求静态图片
@@ -11,6 +10,9 @@ var splashApi = require('./splash/splash')
 router["/splash"] = splashApi.splash
 var homeApi = require('./splash/home')
 router["/home"] = homeApi.home
+
+var itemApi = require('./item/item')
+router["/item"] = itemApi.item
 
 var loginApi = require('./auth/login')
 router["/login"] = loginApi.login
